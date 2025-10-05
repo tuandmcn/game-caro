@@ -28,3 +28,15 @@ G:\VNUIS\14. PTUD\Endterm\game-caro\Game Caro\obj\Debug\Game Caro.csproj.Generat
 G:\VNUIS\14. PTUD\Endterm\game-caro\Game Caro\obj\Debug\Game Caro.csproj.CoreCompileInputs.cache
 G:\VNUIS\14. PTUD\Endterm\game-caro\Game Caro\obj\Debug\Game Caro.exe
 G:\VNUIS\14. PTUD\Endterm\game-caro\Game Caro\obj\Debug\Game Caro.pdb
+C:\Users\Zbook G3\Source\Repos\tic-tac-toe\Game Caro\bin\Debug\Game Caro.exe.config
+C:\Users\Zbook G3\Source\Repos\tic-tac-toe\Game Caro\bin\Debug\Game Caro.exe
+C:\Users\Zbook G3\Source\Repos\tic-tac-toe\Game Caro\bin\Debug\Game Caro.pdb
+C:\Users\Zbook G3\Source\Repos\tic-tac-toe\Game Caro\obj\Debug\Game Caro.csproj.AssemblyReference.cache
+C:\Users\Zbook G3\Source\Repos\tic-tac-toe\Game Caro\obj\Debug\Game_Caro.GameCaro.resources
+C:\Users\Zbook G3\Source\Repos\tic-tac-toe\Game Caro\obj\Debug\Game_Caro.Properties.Resources.resources
+C:\Users\Zbook G3\Source\Repos\tic-tac-toe\Game Caro\obj\Debug\Game Caro.csproj.GenerateResource.cache
+C:\Users\Zbook G3\Source\Repos\tic-tac-toe\Game Caro\obj\Debug\Game Caro.csproj.CoreCompileInputs.cache
+C:\Users\Zbook G3\Source\Repos\tic-tac-toe\Game Caro\obj\Debug\Game Caro.exe
+C:\Users\Zbook G3\Source\Repos\tic-tac-toe\Game Caro\obj\Debug\Game Caro.pdb
+C:\Users\Zbook G3\source\repos\tic-tac-toe\Game Caro\obj\Debug\Game Caro.exe.config
+C:\Users\Zbook G3\source\repos\tic-tac-toe\Game Caro\obj\Debug\Game_Caro.LoginForm.resources
