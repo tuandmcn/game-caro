@@ -169,6 +169,7 @@
             this.lbl_About.Size = new System.Drawing.Size(145, 90);
             this.lbl_About.TabIndex = 4;
             this.lbl_About.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lbl_About.Click += new System.EventHandler(this.lbl_About_Click);
             // 
             // txt_PlayerName
             // 

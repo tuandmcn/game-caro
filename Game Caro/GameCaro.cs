@@ -64,7 +64,7 @@ namespace Game_Caro
 
         private void GameCaro_Load(object sender, EventArgs e)
         {
-            lbl_About.Text = "Tic Tac Toe project in\nC# WinForms\n-- ♦ ♦ ♦ --\nWritten by: Quân Đặng";
+            lbl_About.Text = "This project is an internet-based Tic Tac Toe game developed using C# programming language. Created by Group 5.";
             tm_About.Enabled = true;
         }
 
@@ -246,7 +246,8 @@ namespace Game_Caro
 
         private void HowToPlayToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            HowToPlayForm helpForm = new HowToPlayForm();
+            helpForm.ShowDialog(); // hiển thị dưới dạng hộp thoại
         }
 
         private void ContactMeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -414,5 +415,10 @@ namespace Game_Caro
         #endregion
 
         #endregion
+
+        private void lbl_About_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
