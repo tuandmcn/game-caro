@@ -396,6 +396,7 @@
             this.menuStrip.Size = new System.Drawing.Size(970, 24);
             this.menuStrip.TabIndex = 5;
             this.menuStrip.Text = "menuStrip";
+            this.menuStrip.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip_ItemClicked);
             // 
             // menuToolStripMenuItem
             // 
@@ -515,26 +516,26 @@
             // 
             this.howToPlayToolStripMenuItem.Name = "howToPlayToolStripMenuItem";
             this.howToPlayToolStripMenuItem.ShortcutKeys = System.Windows.Forms.Keys.F1;
-            this.howToPlayToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.howToPlayToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.howToPlayToolStripMenuItem.Text = "How to play";
             this.howToPlayToolStripMenuItem.Click += new System.EventHandler(this.HowToPlayToolStripMenuItem_Click);
             // 
             // contactMeToolStripMenuItem
             // 
             this.contactMeToolStripMenuItem.Name = "contactMeToolStripMenuItem";
-            this.contactMeToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.contactMeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.contactMeToolStripMenuItem.Text = "Contact me";
             this.contactMeToolStripMenuItem.Click += new System.EventHandler(this.ContactMeToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(159, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(177, 6);
             // 
             // aboutThisGameToolStripMenuItem
             // 
             this.aboutThisGameToolStripMenuItem.Name = "aboutThisGameToolStripMenuItem";
-            this.aboutThisGameToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.aboutThisGameToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.aboutThisGameToolStripMenuItem.Text = "About this game";
             this.aboutThisGameToolStripMenuItem.Click += new System.EventHandler(this.AboutThisGameToolStripMenuItem_Click);
             // 

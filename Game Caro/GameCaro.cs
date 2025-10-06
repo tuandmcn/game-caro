@@ -16,6 +16,9 @@ namespace Game_Caro
         public GameCaro()
         {
             InitializeComponent();
+            this.KeyPreview = true;
+            this.KeyDown += GameCaro_KeyDown;
+
             Control.CheckForIllegalCrossThreadCalls = false;
 
             board = new GameBoard(pn_GameBoard, txt_PlayerName, pb_Avatar);            
@@ -35,6 +38,26 @@ namespace Game_Caro
         #endregion
 
         #region Methods
+        private void GameCaro_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F1)
+            {
+                ShowHowToPlay();
+                e.Handled = true;
+            }
+        }
+
+        private void ShowHowToPlay()
+        {
+            HowToPlayForm helpForm = new HowToPlayForm();
+            helpForm.ShowDialog();
+        }
+
+        private void ShowContactMe()
+        {
+            ContactMe contactForm = new ContactMe();
+            contactForm.ShowDialog();
+        }
 
         void NewGame()
         {
@@ -246,13 +269,12 @@ namespace Game_Caro
 
         private void HowToPlayToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            HowToPlayForm helpForm = new HowToPlayForm();
-            helpForm.ShowDialog(); // hiển thị dưới dạng hộp thoại
+            ShowHowToPlay();
         }
 
         private void ContactMeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            ShowContactMe();
         }
 
         private void AboutThisGameToolStripMenuItem_Click(object sender, EventArgs e)
@@ -417,6 +439,11 @@ namespace Game_Caro
         #endregion
 
         private void lbl_About_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void menuStrip_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
 
         }

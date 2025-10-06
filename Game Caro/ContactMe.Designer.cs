@@ -1,7 +1,7 @@
 ﻿
 namespace Game_Caro
 {
-    partial class HowToPlayForm
+    partial class ContactMe
     {
         /// <summary>
         /// Required designer variable.
@@ -29,13 +29,13 @@ namespace Game_Caro
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HowToPlayForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ContactMe));
             this.btnClose = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnClose
             // 
-            this.btnClose.Location = new System.Drawing.Point(438, 296);
+            this.btnClose.Location = new System.Drawing.Point(433, 293);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(75, 23);
             this.btnClose.TabIndex = 0;
@@ -43,17 +43,16 @@ namespace Game_Caro
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
-            // HowToPlayForm
+            // ContactMe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(525, 331);
+            this.ClientSize = new System.Drawing.Size(520, 328);
             this.Controls.Add(this.btnClose);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
-            this.Name = "HowToPlayForm";
-            this.Text = "How To Play";
-            this.Load += new System.EventHandler(this.HowToPlayForm_Load);
+            this.Name = "ContactMe";
+            this.Text = "Contact me";
             this.ResumeLayout(false);
 
         }
