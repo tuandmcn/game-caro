@@ -19,7 +19,7 @@ namespace Game_Caro
             this.StartPosition = FormStartPosition.CenterParent;
             //this.Size = new Size(500, 350);
 
-            RichTextBox guide = new RichTextBox();
+            TransparentRichTextBox guide = new TransparentRichTextBox();
             guide.ReadOnly = true;
             guide.BorderStyle = BorderStyle.None;
             guide.Dock = DockStyle.Fill;

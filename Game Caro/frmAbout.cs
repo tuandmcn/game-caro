@@ -18,7 +18,7 @@ namespace Game_Caro
             this.Text = "How to Play";
             this.StartPosition = FormStartPosition.CenterParent;
 
-            RichTextBox rtbAbout = new RichTextBox();
+            TransparentRichTextBox rtbAbout = new TransparentRichTextBox();
             //int paddingInPixels = 38; // 0.5 cm
 
             rtbAbout.ReadOnly = true;

@@ -89,6 +89,9 @@
     </Compile>
     <Compile Include="SocketData.cs" />
     <Compile Include="SocketManager.cs" />
+    <Compile Include="TransparentRichTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <EmbeddedResource Include="ContactMe.resx">
       <DependentUpon>ContactMe.cs</DependentUpon>
     </EmbeddedResource>
@@ -121,6 +124,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="images\background_main.jpg" />
     <Content Include="images\logo_kmin.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
