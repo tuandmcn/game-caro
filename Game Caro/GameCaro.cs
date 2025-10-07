@@ -99,7 +99,7 @@ namespace Game_Caro
 
         private void GameCaro_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (MessageBox.Show("Bạn có chắc muốn thoát không", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != System.Windows.Forms.DialogResult.Yes)
+            if (MessageBox.Show("Are you sure you want to exit?", "Message", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != System.Windows.Forms.DialogResult.Yes)
                 e.Cancel = true;
             else
             {
@@ -133,7 +133,7 @@ namespace Game_Caro
                 catch
                 {
                     EndGame();
-                    MessageBox.Show("Không có kết nối nào tới máy đối thủ", "Lỗi kết nối", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Could not connect to the opponent.", "Connection Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -219,14 +219,14 @@ namespace Game_Caro
                 socket.IsServer = true;
                 pn_GameBoard.Enabled = true;
                 socket.CreateServer();
-                MessageBox.Show("Bạn đang là Server", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("You are hosting the game.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
                 socket.IsServer = false;
                 pn_GameBoard.Enabled = false;
                 Listen();
-                MessageBox.Show("Kết nối thành công !!!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Connection established!!!", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
@@ -240,7 +240,7 @@ namespace Game_Caro
                 } catch { }
 
                 socket.CloseConnect();
-                MessageBox.Show("Đã ngắt kết nối mạng LAN", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Disconnected from LAN.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
             board.PlayMode = 2;
@@ -259,7 +259,7 @@ namespace Game_Caro
                     } catch { }
 
                     socket.CloseConnect();
-                    MessageBox.Show("Đã ngắt kết nối mạng LAN", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Disconnected from LAN.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
 
@@ -409,7 +409,7 @@ namespace Game_Caro
                     this.Invoke((MethodInvoker)(() =>
                     {
                         EndGame();
-                        MessageBox.Show(PlayerName + " đã chiến thắng ♥ !!!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show(PlayerName + " is the winner ♥ !!!", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }));
                     break;
 
@@ -417,7 +417,7 @@ namespace Game_Caro
                     this.Invoke((MethodInvoker)(() =>
                     {
                         EndGame();
-                        MessageBox.Show("Hết giờ rồi !!!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("Time has expired !!!", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }));
                     break;
 
@@ -430,7 +430,7 @@ namespace Game_Caro
                         board.PlayMode = 2;
                         socket.CloseConnect();
 
-                        MessageBox.Show("Đối thủ đã chạy mất dép", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show("The opponent has disconnected.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }));
                     break;
 
