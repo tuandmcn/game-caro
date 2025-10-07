@@ -28,3 +28,13 @@ G:\VNUIS\14. PTUD\Endterm\game-caro\Game Caro\obj\Debug\Game Caro.csproj.Generat
 G:\VNUIS\14. PTUD\Endterm\game-caro\Game Caro\obj\Debug\Game Caro.csproj.CoreCompileInputs.cache
 G:\VNUIS\14. PTUD\Endterm\game-caro\Game Caro\obj\Debug\Game Caro.exe
 G:\VNUIS\14. PTUD\Endterm\game-caro\Game Caro\obj\Debug\Game Caro.pdb
+\\Mac\Home\Downloads\tic-tac-toe\Game Caro\bin\Debug\Game Caro.exe.config
+\\Mac\Home\Downloads\tic-tac-toe\Game Caro\bin\Debug\Game Caro.exe
+\\Mac\Home\Downloads\tic-tac-toe\Game Caro\bin\Debug\Game Caro.pdb
+\\Mac\Home\Downloads\tic-tac-toe\Game Caro\obj\Debug\Game Caro.csproj.AssemblyReference.cache
+\\Mac\Home\Downloads\tic-tac-toe\Game Caro\obj\Debug\Game_Caro.GameCaro.resources
+\\Mac\Home\Downloads\tic-tac-toe\Game Caro\obj\Debug\Game_Caro.Properties.Resources.resources
+\\Mac\Home\Downloads\tic-tac-toe\Game Caro\obj\Debug\Game Caro.csproj.GenerateResource.cache
+\\Mac\Home\Downloads\tic-tac-toe\Game Caro\obj\Debug\Game Caro.csproj.CoreCompileInputs.cache
+\\Mac\Home\Downloads\tic-tac-toe\Game Caro\obj\Debug\Game Caro.exe
+\\Mac\Home\Downloads\tic-tac-toe\Game Caro\obj\Debug\Game Caro.pdb

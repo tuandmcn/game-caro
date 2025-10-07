@@ -1,0 +1,131 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "\\\\Mac\\Home\\Downloads\\tic-tac-toe\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{FBC8E721-3171-4A37-BA79-BC8A1C3B55F1}|Game Caro\\Game Caro.csproj|\\\\mac\\home\\downloads\\tic-tac-toe\\game caro\\gameboard.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FBC8E721-3171-4A37-BA79-BC8A1C3B55F1}|Game Caro\\Game Caro.csproj|\\\\mac\\home\\downloads\\tic-tac-toe\\game caro\\gamecaro.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FBC8E721-3171-4A37-BA79-BC8A1C3B55F1}|Game Caro\\Game Caro.csproj|\\\\mac\\home\\downloads\\tic-tac-toe\\game caro\\gamecaro.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FBC8E721-3171-4A37-BA79-BC8A1C3B55F1}|Game Caro\\Game Caro.csproj|\\\\mac\\home\\downloads\\tic-tac-toe\\game caro\\gamecaro.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FBC8E721-3171-4A37-BA79-BC8A1C3B55F1}|Game Caro\\Game Caro.csproj|\\\\mac\\home\\downloads\\tic-tac-toe\\game caro\\playinfo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FBC8E721-3171-4A37-BA79-BC8A1C3B55F1}|Game Caro\\Game Caro.csproj|\\\\mac\\home\\downloads\\tic-tac-toe\\game caro\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FBC8E721-3171-4A37-BA79-BC8A1C3B55F1}|Game Caro\\Game Caro.csproj|\\\\mac\\home\\downloads\\tic-tac-toe\\game caro\\globalsuppressions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 5,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "GameCaro.cs",
+              "DocumentMoniker": "\\\\Mac\\Home\\Downloads\\tic-tac-toe\\Game Caro\\GameCaro.cs",
+              "RelativeDocumentMoniker": "Game Caro\\GameCaro.cs",
+              "ToolTip": "\\\\Mac\\Home\\Downloads\\tic-tac-toe\\Game Caro\\GameCaro.cs",
+              "RelativeToolTip": "Game Caro\\GameCaro.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACQAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-06T14:37:55.467Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "PlayInfo.cs",
+              "DocumentMoniker": "\\\\Mac\\Home\\Downloads\\tic-tac-toe\\Game Caro\\PlayInfo.cs",
+              "RelativeDocumentMoniker": "Game Caro\\PlayInfo.cs",
+              "ToolTip": "\\\\Mac\\Home\\Downloads\\tic-tac-toe\\Game Caro\\PlayInfo.cs",
+              "RelativeToolTip": "Game Caro\\PlayInfo.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAAAAABsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-06T14:29:19.923Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Player.cs",
+              "DocumentMoniker": "\\\\Mac\\Home\\Downloads\\tic-tac-toe\\Game Caro\\Player.cs",
+              "RelativeDocumentMoniker": "Game Caro\\Player.cs",
+              "ToolTip": "\\\\Mac\\Home\\Downloads\\tic-tac-toe\\Game Caro\\Player.cs",
+              "RelativeToolTip": "Game Caro\\Player.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-06T14:29:13.892Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "GlobalSuppressions.cs",
+              "DocumentMoniker": "\\\\Mac\\Home\\Downloads\\tic-tac-toe\\Game Caro\\GlobalSuppressions.cs",
+              "RelativeDocumentMoniker": "Game Caro\\GlobalSuppressions.cs",
+              "ToolTip": "\\\\Mac\\Home\\Downloads\\tic-tac-toe\\Game Caro\\GlobalSuppressions.cs",
+              "RelativeToolTip": "Game Caro\\GlobalSuppressions.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-06T14:29:12.105Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "GameCaro.cs [Design]",
+              "DocumentMoniker": "\\\\Mac\\Home\\Downloads\\tic-tac-toe\\Game Caro\\GameCaro.cs",
+              "RelativeDocumentMoniker": "Game Caro\\GameCaro.cs",
+              "ToolTip": "\\\\Mac\\Home\\Downloads\\tic-tac-toe\\Game Caro\\GameCaro.cs [Design]",
+              "RelativeToolTip": "Game Caro\\GameCaro.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-06T14:29:03.108Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "GameBoard.cs",
+              "DocumentMoniker": "\\\\Mac\\Home\\Downloads\\tic-tac-toe\\Game Caro\\GameBoard.cs",
+              "RelativeDocumentMoniker": "Game Caro\\GameBoard.cs",
+              "ToolTip": "\\\\Mac\\Home\\Downloads\\tic-tac-toe\\Game Caro\\GameBoard.cs",
+              "RelativeToolTip": "Game Caro\\GameBoard.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAawBoAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-06T12:59:02.842Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "GameCaro.Designer.cs",
+              "DocumentMoniker": "\\\\Mac\\Home\\Downloads\\tic-tac-toe\\Game Caro\\GameCaro.Designer.cs",
+              "RelativeDocumentMoniker": "Game Caro\\GameCaro.Designer.cs",
+              "ToolTip": "\\\\Mac\\Home\\Downloads\\tic-tac-toe\\Game Caro\\GameCaro.Designer.cs",
+              "RelativeToolTip": "Game Caro\\GameCaro.Designer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-06T14:30:30.116Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
