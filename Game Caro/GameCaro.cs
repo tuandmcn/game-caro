@@ -283,15 +283,45 @@ namespace Game_Caro
             }
         }
 
-        private void Board_GameOver(object sender, EventArgs e)
-        {
-            EndGame();
+		//private void Board_GameOver(object sender, EventArgs e)
+		//{
+		//    EndGame();
 
-            if (board.PlayMode == 1)
-                socket.Send(new SocketData((int)SocketCommand.END_GAME, "", new Point()));
-        }
+		//    if (board.PlayMode == 1)
+		//        socket.Send(new SocketData((int)SocketCommand.END_GAME, "", new Point()));
+		//}
+		private void Board_GameOver(object sender, EventArgs e)
+		{
+			// Xác định người thắng dựa trên nước đi cuối cùng
+			if (board.StkUndoStep != null && board.StkUndoStep.Count > 0)
+			{
+				var last = board.StkUndoStep.Peek();          // nước đi cuối
+				int winnerIdx = last.CurrentPlayer;           // 0 hoặc 1
 
-        private void Tm_CountDown_Tick(object sender, EventArgs e)
+				string msg;
+				if (board.PlayMode == 3) // Chơi với máy (AI)
+				{
+					// Trong code hiện tại AI là người chơi 0, bạn là 1
+					msg = (winnerIdx == 0) ? "Máy thắng!" : "Bạn thắng!";
+				}
+				else
+				{
+					// 2 người trên cùng máy hoặc qua LAN: hiển thị tên người thắng
+					string winnerName = board.ListPlayers[winnerIdx].Name;
+					msg = $"\"{winnerName}\" thắng!";
+				}
+
+				MessageBox.Show(msg, "Kết quả", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			}
+
+			EndGame();  // dừng đồng hồ, khóa bàn cờ
+
+			if (board.PlayMode == 1)
+				socket.Send(new SocketData((int)SocketCommand.END_GAME, "", new Point()));
+		}
+
+
+		private void Tm_CountDown_Tick(object sender, EventArgs e)
         {
             pgb_CountDown.PerformStep();
 

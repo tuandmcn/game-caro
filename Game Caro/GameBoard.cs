@@ -30,7 +30,13 @@ namespace Game_Caro
         private int boardSize = 10;  // Default size 10x10
         private int cellsToWin = 5;  // Default 5 in a row to win
 
-        public Panel Board
+		// Giới hạn tổng số lần UNDO + REDO cho mỗi người chơi trong một ván
+		private const int OP_LIMIT = 5;
+		// opCount[0] cho Player 0 (AI nếu PlayMode=3), opCount[1] cho Player 1 (người)
+		private int[] opCount = new int[2];
+
+
+		public Panel Board
         {
             get { return board; }
             set { board = value; }
@@ -164,7 +170,10 @@ namespace Game_Caro
             StkUndoStep = new Stack<PlayInfo>();
             StkRedoStep = new Stack<PlayInfo>();
 
-            this.CurrentPlayer = 0;
+			opCount[0] = 0;
+			opCount[1] = 0;
+
+			this.CurrentPlayer = 0;
             ChangePlayer();
 
             int LocX = 0;
@@ -220,7 +229,20 @@ namespace Game_Caro
             if (StkUndoStep.Count <= 1)
                 return false;
 
-            PlayInfo OldPos = StkUndoStep.Peek();
+			// Giới hạn tổng số lần UNDO+REDO theo chế độ chơi
+			int actor = this.CurrentPlayer;               // người đang tới lượt bấm Undo
+			if (this.PlayMode == 3) actor = 1;            // Chơi với máy: chỉ người thật bị giới hạn
+
+			if (opCount[actor] >= OP_LIMIT)
+			{
+				MessageBox.Show($"Bạn đã dùng hết {OP_LIMIT} lần UNDO/REDO.",
+								"Giới hạn", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				return false;
+			}
+			opCount[actor]++; // ghi nhận một lần thao tác Undo/Redo
+
+
+			PlayInfo OldPos = StkUndoStep.Peek();
             CurrentPlayer = OldPos.CurrentPlayer == 1 ? 0 : 1;
 
             bool IsUndo1 = UndoAStep();
@@ -255,7 +277,20 @@ namespace Game_Caro
             if (StkRedoStep.Count <= 0)
                 return false;
 
-            PlayInfo OldPos = StkRedoStep.Peek();
+			// Giới hạn tổng số lần UNDO+REDO theo chế độ chơi
+			int actor = this.CurrentPlayer;               // người đang tới lượt bấm Redo
+			if (this.PlayMode == 3) actor = 1;            // Chơi với máy: chỉ người thật bị giới hạn
+
+			if (opCount[actor] >= OP_LIMIT)
+			{
+				MessageBox.Show($"Bạn đã dùng hết {OP_LIMIT} lần UNDO/REDO.",
+								"Giới hạn", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				return false;
+			}
+			opCount[actor]++; // ghi nhận một lần thao tác Undo/Redo
+
+
+			PlayInfo OldPos = StkRedoStep.Peek();
             CurrentPlayer = OldPos.CurrentPlayer;
 
             bool IsRedo1 = RedoAStep();
