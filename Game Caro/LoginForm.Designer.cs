@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginForm));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.txt_PlayerName = new System.Windows.Forms.TextBox();
@@ -36,7 +35,6 @@
             this.btn_HostGame = new System.Windows.Forms.Button();
             this.btn_JoinGame = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -46,7 +44,6 @@
             this.numBoardSize = new System.Windows.Forms.NumericUpDown();
             this.lblBoardSizeInfo = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numBoardSize)).BeginInit();
             this.SuspendLayout();
             // 
@@ -56,7 +53,7 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(36, 147);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(111, 20);
+            this.label1.Size = new System.Drawing.Size(123, 20);
             this.label1.TabIndex = 0;
             this.label1.Text = "Tên người chơi:";
             // 
@@ -66,14 +63,14 @@
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(36, 193);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(72, 20);
+            this.label2.Size = new System.Drawing.Size(86, 20);
             this.label2.TabIndex = 1;
             this.label2.Text = "Địa chỉ IP:";
             // 
             // txt_PlayerName
             // 
             this.txt_PlayerName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_PlayerName.Location = new System.Drawing.Point(153, 144);
+            this.txt_PlayerName.Location = new System.Drawing.Point(179, 144);
             this.txt_PlayerName.Name = "txt_PlayerName";
             this.txt_PlayerName.Size = new System.Drawing.Size(244, 26);
             this.txt_PlayerName.TabIndex = 2;
@@ -81,7 +78,7 @@
             // txt_IP
             // 
             this.txt_IP.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_IP.Location = new System.Drawing.Point(153, 190);
+            this.txt_IP.Location = new System.Drawing.Point(179, 187);
             this.txt_IP.Name = "txt_IP";
             this.txt_IP.Size = new System.Drawing.Size(244, 26);
             this.txt_IP.TabIndex = 3;
@@ -113,7 +110,6 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.SkyBlue;
-            this.panel1.Controls.Add(this.pictureBox1);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
@@ -121,23 +117,13 @@
             this.panel1.Size = new System.Drawing.Size(443, 117);
             this.panel1.TabIndex = 6;
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(40, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(96, 96);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Arial", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(146, 40);
+            this.label3.Location = new System.Drawing.Point(97, 34);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(254, 38);
+            this.label3.Size = new System.Drawing.Size(251, 38);
             this.label3.TabIndex = 0;
             this.label3.Text = "TIC TAC TOE ♥";
             // 
@@ -147,7 +133,7 @@
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(36, 262);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(127, 20);
+            this.label4.Size = new System.Drawing.Size(125, 20);
             this.label4.TabIndex = 7;
             this.label4.Text = "Chơi qua LAN";
             // 
@@ -157,7 +143,7 @@
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(36, 352);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(111, 20);
+            this.label5.Size = new System.Drawing.Size(103, 20);
             this.label5.TabIndex = 8;
             this.label5.Text = "Chơi ở máy";
             // 
@@ -191,7 +177,7 @@
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.Location = new System.Drawing.Point(36, 229);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(72, 20);
+            this.label6.Size = new System.Drawing.Size(71, 20);
             this.label6.TabIndex = 11;
             this.label6.Text = "Số ô cờ:";
             // 
@@ -225,7 +211,7 @@
             this.lblBoardSizeInfo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblBoardSizeInfo.Location = new System.Drawing.Point(229, 229);
             this.lblBoardSizeInfo.Name = "lblBoardSizeInfo";
-            this.lblBoardSizeInfo.Size = new System.Drawing.Size(167, 18);
+            this.lblBoardSizeInfo.Size = new System.Drawing.Size(179, 18);
             this.lblBoardSizeInfo.TabIndex = 13;
             this.lblBoardSizeInfo.Text = "(thắng 5 liên tiếp để thắng)";
             // 
@@ -256,7 +242,6 @@
             this.Load += new System.EventHandler(this.LoginForm_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numBoardSize)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -273,7 +258,6 @@
         private System.Windows.Forms.Button btn_JoinGame;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btn_SamePC;

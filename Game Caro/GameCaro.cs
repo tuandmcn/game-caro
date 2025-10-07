@@ -185,6 +185,13 @@ namespace Game_Caro
             btn_Undo.Enabled = true;
             btn_Redo.Enabled = true;
 
+            // Cập nhật kích thước bàn cờ nếu đã thay đổi qua Settings
+            board.SetBoardSize(BoardSize);
+            AdjustBoardPanelSize();
+            
+            // Cập nhật tiêu đề của form để hiển thị kích thước bàn cờ mới
+            this.Text = $"Game Caro - Bàn cờ {BoardSize}x{BoardSize} - Thắng {board.CellsToWin} ô liên tiếp";
+
             board.DrawGameBoard();
         }
 
@@ -291,6 +298,10 @@ namespace Game_Caro
             }
                 
             pn_GameBoard.Enabled = true;
+            
+            // Thông báo cho người dùng biết có thể thay đổi cài đặt
+            MessageBox.Show("Ván mới đã được tạo. Bạn có thể thay đổi kích thước bàn cờ trong menu Options > Settings trước khi bắt đầu đánh.", 
+                "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void UndoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -378,7 +389,35 @@ namespace Game_Caro
 
         private void SettingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            // Cho phép mở Settings khi:
+            // 1. Ván chơi đã kết thúc (pn_GameBoard.Enabled == false)
+            // 2. Chưa bắt đầu ván chơi nào (board.StkUndoStep == null)
+            // 3. Đã bắt đầu ván mới nhưng chưa đánh ô nào (board.StkUndoStep.Count == 0)
+            if (pn_GameBoard.Enabled == false || board.StkUndoStep == null || board.StkUndoStep.Count == 0)
+            {
+                // Tạo form Settings với kích thước bàn cờ hiện tại
+                SettingsForm settingsForm = new SettingsForm(BoardSize);
+                
+                // Đăng ký xử lý sự kiện khi kích thước bàn cờ thay đổi
+                settingsForm.BoardSizeChanged += (s, args) => 
+                {
+                    BoardSize = args.NewBoardSize;
+                    
+                    // Nếu đang ở ván mới chưa đánh ô nào, áp dụng thay đổi ngay lập tức
+                    if (board.StkUndoStep != null && board.StkUndoStep.Count == 0)
+                    {
+                        NewGame(); // Áp dụng kích thước bàn cờ mới ngay lập tức
+                    }
+                };
+                
+                // Hiển thị form Settings
+                settingsForm.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Bạn cần kết thúc ván chơi hiện tại hoặc bắt đầu ván mới trước khi thay đổi cài đặt!", 
+                    "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void HowToPlayToolStripMenuItem_Click(object sender, EventArgs e)

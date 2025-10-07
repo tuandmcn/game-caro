@@ -147,19 +147,10 @@ namespace Game_Caro
                 Constance.nRows = size;
                 Constance.nCols = size;
                 
-                // Adjust cell size for larger boards to keep them visible
-                if (size > 10)
-                {
-                    int cellSize = Math.Max(20, 840 / size); // Minimum 20px
-                    Constance.CellWidth = cellSize;
-                    Constance.CellHeight = cellSize;
-                }
-                else
-                {
-                    // Reset to default cell size for smaller boards
-                    Constance.CellWidth = 35;
-                    Constance.CellHeight = 35;
-                }
+                // FIXED: Always maintain a consistent cell size regardless of board size
+                // The default is 35x35 pixels for all board sizes
+                Constance.CellWidth = 35;
+                Constance.CellHeight = 35;
             }
         }
         #endregion

@@ -40,3 +40,4 @@ C:\Users\Zbook G3\Source\Repos\tic-tac-toe\Game Caro\obj\Debug\Game Caro.exe
 C:\Users\Zbook G3\Source\Repos\tic-tac-toe\Game Caro\obj\Debug\Game Caro.pdb
 C:\Users\Zbook G3\source\repos\tic-tac-toe\Game Caro\obj\Debug\Game Caro.exe.config
 C:\Users\Zbook G3\source\repos\tic-tac-toe\Game Caro\obj\Debug\Game_Caro.LoginForm.resources
+C:\Users\Zbook G3\source\repos\tic-tac-toe\Game Caro\obj\Debug\Game_Caro.SettingsForm.resources
