@@ -1,2 +1,7 @@
+################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
 /Game Caro/bin/Debug
 /Game Caro/obj/Debug

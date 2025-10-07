@@ -183,7 +183,7 @@
             this.txt_PlayerName.ReadOnly = true;
             this.txt_PlayerName.Size = new System.Drawing.Size(146, 26);
             this.txt_PlayerName.TabIndex = 1;
-            this.txt_PlayerName.Text = "Quân Đặng";
+            this.txt_PlayerName.Text = ""; // We'll set this from the login form
             this.txt_PlayerName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // pb_Avatar
@@ -232,9 +232,10 @@
             this.txt_IP.Location = new System.Drawing.Point(155, 1);
             this.txt_IP.Margin = new System.Windows.Forms.Padding(2);
             this.txt_IP.Name = "txt_IP";
-            this.txt_IP.Size = new System.Drawing.Size(145, 26);
+            this.txt_IP.ReadOnly = true;
+            this.txt_IP.Size = new System.Drawing.Size(193, 30);
             this.txt_IP.TabIndex = 1;
-            this.txt_IP.Text = "127.0.0.1";
+            this.txt_IP.Text = ""; // We'll set this from the login form
             this.txt_IP.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // btn_Undo
@@ -300,6 +301,7 @@
             this.btn_AI.TabIndex = 3;
             this.btn_AI.Text = "Player vs Com";
             this.btn_AI.UseVisualStyleBackColor = false;
+            this.btn_AI.Visible = false; // Hide the AI button
             this.btn_AI.Click += new System.EventHandler(this.Btn_AI_Click);
             // 
             // pictureBox1
@@ -330,6 +332,7 @@
             this.btn_SameCom.TabIndex = 3;
             this.btn_SameCom.Text = "2 Players / Com";
             this.btn_SameCom.UseVisualStyleBackColor = false;
+            this.btn_SameCom.Visible = false; // Hide the Same Computer button
             this.btn_SameCom.Click += new System.EventHandler(this.Btn_SameCom_Click);
             // 
             // btn_LAN
@@ -348,6 +351,7 @@
             this.btn_LAN.TabIndex = 3;
             this.btn_LAN.Text = "2 Players in LAN";
             this.btn_LAN.UseVisualStyleBackColor = false;
+            this.btn_LAN.Visible = false; // Hide the LAN button
             this.btn_LAN.Click += new System.EventHandler(this.Btn_LAN_Click);
             // 
             // tm_CountDown
