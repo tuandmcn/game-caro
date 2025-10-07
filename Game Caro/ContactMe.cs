@@ -48,5 +48,10 @@ namespace Game_Caro
         {
             this.Close();
         }
+
+        private void ContactMe_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

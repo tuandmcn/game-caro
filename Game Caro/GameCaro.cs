@@ -59,6 +59,12 @@ namespace Game_Caro
             contactForm.ShowDialog();
         }
 
+        private void ShowAbout()
+        {
+            frmAbout aboutForm = new frmAbout();
+            aboutForm.ShowDialog();
+        }
+
         void NewGame()
         {
             pgb_CountDown.Value = 0;
@@ -279,7 +285,7 @@ namespace Game_Caro
 
         private void AboutThisGameToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            ShowAbout();
         }
         #endregion     
 
