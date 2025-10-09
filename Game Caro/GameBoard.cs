@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -26,15 +26,20 @@ namespace Game_Caro
         private int playMode = 0;
         private bool IsAI = false;
         
+        // Added property to track if AI goes first
+        private bool aiGoesFirst = true;
+        
+        // Th�m thu?c t�nh ?? ki?m tra n?u b�n c? ?� ???c v? xong
+        private bool boardReady = false;
+        
         // Added properties for configurable board size
         private int boardSize = 10;  // Default size 10x10
         private int cellsToWin = 5;  // Default 5 in a row to win
 
-		// Giới hạn tổng số lần UNDO + REDO cho mỗi người chơi trong một ván
+		// Gi?i h?n t?ng s? l?n UNDO + REDO cho m?i ng??i ch?i trong m?t v�n
 		private const int OP_LIMIT = 5;
-		// opCount[0] cho Player 0 (AI nếu PlayMode=3), opCount[1] cho Player 1 (người)
+		// opCount[0] cho Player 0 (AI n?u PlayMode=3), opCount[1] cho Player 1 (ng??i)
 		private int[] opCount = new int[2];
-
 
 		public Panel Board
         {
@@ -102,6 +107,17 @@ namespace Game_Caro
             set { playMode = value; }
         }
         
+        public bool AIGoesFirst
+        {
+            get { return aiGoesFirst; }
+            set { aiGoesFirst = value; }
+        }
+        
+        public bool BoardReady
+        {
+            get { return boardReady; }
+        }
+        
         public int BoardSize
         {
             get { return boardSize; }
@@ -164,6 +180,7 @@ namespace Game_Caro
         #region Methods       
         public void DrawGameBoard()
         {
+            boardReady = false;
             board.Enabled = true;
             board.Controls.Clear();
 
@@ -212,6 +229,8 @@ namespace Game_Caro
                 // Move Y position to next row
                 LocY += Constance.CellHeight;
             }
+            
+            boardReady = true;
         }
         
         private Point GetButtonCoordinate(Button btn)
@@ -229,17 +248,17 @@ namespace Game_Caro
             if (StkUndoStep.Count <= 1)
                 return false;
 
-			// Giới hạn tổng số lần UNDO+REDO theo chế độ chơi
-			int actor = this.CurrentPlayer;               // người đang tới lượt bấm Undo
-			if (this.PlayMode == 3) actor = 1;            // Chơi với máy: chỉ người thật bị giới hạn
+			// Gi?i h?n t?ng s? l?n UNDO+REDO theo ch? ?? ch?i
+			int actor = this.CurrentPlayer;               // ng??i ?ang t?i l??t b?m Undo
+			if (this.PlayMode == 3) actor = 1;            // Ch?i v?i m�y: ch? ng??i th?t b? gi?i h?n
 
 			if (opCount[actor] >= OP_LIMIT)
 			{
-				MessageBox.Show($"Bạn đã dùng hết {OP_LIMIT} lần UNDO/REDO.",
-								"Giới hạn", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				MessageBox.Show($"B?n ?� d�ng h?t {OP_LIMIT} l?n UNDO/REDO.",
+								"Gi?i h?n", MessageBoxButtons.OK, MessageBoxIcon.Information);
 				return false;
 			}
-			opCount[actor]++; // ghi nhận một lần thao tác Undo/Redo
+			opCount[actor]++; // ghi nh?n m?t l?n thao t�c Undo/Redo
 
 
 			PlayInfo OldPos = StkUndoStep.Peek();
@@ -277,17 +296,17 @@ namespace Game_Caro
             if (StkRedoStep.Count <= 0)
                 return false;
 
-			// Giới hạn tổng số lần UNDO+REDO theo chế độ chơi
-			int actor = this.CurrentPlayer;               // người đang tới lượt bấm Redo
-			if (this.PlayMode == 3) actor = 1;            // Chơi với máy: chỉ người thật bị giới hạn
+			// Gi?i h?n t?ng s? l?n UNDO+REDO theo ch? ?? ch?i
+			int actor = this.CurrentPlayer;               // ng??i ?ang t?i l??t b?m Redo
+			if (this.PlayMode == 3) actor = 1;            // Ch?i v?i m�y: ch? ng??i th?t b? gi?i h?n
 
 			if (opCount[actor] >= OP_LIMIT)
 			{
-				MessageBox.Show($"Bạn đã dùng hết {OP_LIMIT} lần UNDO/REDO.",
-								"Giới hạn", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				MessageBox.Show($"B?n ?� d�ng h?t {OP_LIMIT} l?n UNDO/REDO.",
+								"Gi?i h?n", MessageBoxButtons.OK, MessageBoxIcon.Information);
 				return false;
 			}
-			opCount[actor]++; // ghi nhận một lần thao tác Undo/Redo
+			opCount[actor]++; // ghi nh?n m?t l?n thao t�c Undo/Redo
 
 
 			PlayInfo OldPos = StkRedoStep.Peek();
@@ -335,7 +354,7 @@ namespace Game_Caro
                 if (MatrixPositions[CurrRow][CurrCol + Count].BackgroundImage != PlayerSymbol)
                     return false;
 
-            // Xét chặn 2 đầu - Check if win condition is valid (not blocked on both sides)
+            // X�t ch?n 2 ??u - Check if win condition is valid (not blocked on both sides)
             if (CurrCol == 0 || CurrCol + Count == Constance.nCols)
                 return true;
 
@@ -363,7 +382,7 @@ namespace Game_Caro
                 if (MatrixPositions[CurrRow + Count][CurrCol].BackgroundImage != PlayerSymbol)
                     return false;
 
-            // Xét chặn 2 đầu - Check if win condition is valid (not blocked on both sides)
+            // X�t ch?n 2 ??u - Check if win condition is valid (not blocked on both sides)
             if (CurrRow == 0 || CurrRow + Count == Constance.nRows)
                 return true;
 
@@ -391,7 +410,7 @@ namespace Game_Caro
                 if (MatrixPositions[CurrRow + Count][CurrCol + Count].BackgroundImage != PlayerSymbol)
                     return false;
 
-            // Xét chặn 2 đầu - Check if win condition is valid (not blocked on both sides)
+            // X�t ch?n 2 ??u - Check if win condition is valid (not blocked on both sides)
             if (CurrRow == 0 || CurrRow + Count == Constance.nRows || CurrCol == 0 || CurrCol + Count == Constance.nCols)
                 return true;
 
@@ -419,7 +438,7 @@ namespace Game_Caro
                 if (MatrixPositions[CurrRow - Count][CurrCol + Count].BackgroundImage != PlayerSymbol)
                     return false;
 
-            // Xét chặn 2 đầu - Check if win condition is valid (not blocked on both sides)
+            // X�t ch?n 2 ??u - Check if win condition is valid (not blocked on both sides)
             if (CurrRow == CellsToWin - 1 || CurrRow == Constance.nRows - 1 || CurrCol == 0 || CurrCol + Count == Constance.nCols)
                 return true;
 
@@ -439,7 +458,7 @@ namespace Game_Caro
             // Check for draw (board full)
             if (StkUndoStep.Count == Constance.nRows * Constance.nCols)
             {
-                MessageBox.Show("Hòa cờ !!!");
+                MessageBox.Show("H�a c? !!!");
                 return true;
             }
 
@@ -484,10 +503,10 @@ namespace Game_Caro
             Button btn = sender as Button;
 
             if (btn.BackgroundImage != null)
-                return; // Nếu ô đã được đánh thì ko cho đánh lại
+                return; // N?u � ?� ???c ?�nh th� ko cho ?�nh l?i
 
             btn.BackgroundImage = ListPlayers[CurrentPlayer].Symbol;
-           
+   
             StkUndoStep.Push(new PlayInfo(GetButtonCoordinate(btn), CurrentPlayer, btn.BackgroundImage));
             StkRedoStep.Clear();
 
@@ -498,7 +517,10 @@ namespace Game_Caro
                 playerClicked(this, new BtnClickEvent(GetButtonCoordinate(btn)));
 
             if (IsEndGame())
+            {
                 EndGame();
+                return;  // Don't continue with AI move if game is over
+            }
 
             if (!(IsAI) && playMode == 3)
                 StartAI();
@@ -511,7 +533,7 @@ namespace Game_Caro
             Button btn = MatrixPositions[point.Y][point.X];
 
             if (btn.BackgroundImage != null)
-                return; // Nếu ô đã được đánh thì ko cho đánh lại
+                return; // N?u � ?� ???c ?�nh th� ko cho ?�nh l?i
 
             btn.BackgroundImage = ListPlayers[CurrentPlayer].Symbol;
 
@@ -537,7 +559,7 @@ namespace Game_Caro
             int ComCells = 0;
             int ManCells = 0;
 
-            // Duyệt từ trên xuống
+            // Duy?t t? tr�n xu?ng
             for (int Count = 1; Count < 6 && CurrRow + Count < Constance.nRows; Count++)
             {
                 if (MatrixPositions[CurrRow + Count][CurrCol].BackgroundImage == ListPlayers[0].Symbol)
@@ -551,7 +573,7 @@ namespace Game_Caro
                     break;
             }
 
-            // Duyệt từ dưới lên
+            // Duy?t t? d??i l�n
             for (int Count = 1; Count < 6 && CurrRow - Count >= 0; Count++)
             {
                 if (MatrixPositions[CurrRow - Count][CurrCol].BackgroundImage == ListPlayers[0].Symbol)
@@ -568,8 +590,8 @@ namespace Game_Caro
             if (ManCells == 2)
                 return 0;
 
-            /* Nếu ManCells == 1 => bị chặn 1 đầu => lấy điểm phòng ngự tại vị trí này nhưng 
-            nên cộng thêm 1 để tăng phòng ngự cho máy cảnh giác hơn vì đã bị chặn 1 đầu */
+            /* N?u ManCells == 1 => b? ch?n 1 ??u => l?y ?i?m ph�ng ng? t?i v? tr� n�y nh?ng 
+            n�n c?ng th�m 1 ?? t?ng ph�ng ng?a cho m�y c?nh gi�c h?n v� ?� b? ch?n 1 ??u */
 
             TotalScore -= ArrDefenseScore[ManCells + 1];
             TotalScore += ArrAttackScore[ComCells];
@@ -583,7 +605,7 @@ namespace Game_Caro
             int ComCells = 0;
             int ManCells = 0;
 
-            // Duyệt từ trái sang phải
+            // Duy?t t? tr�i sang ph?i
             for (int Count = 1; Count < 6 && CurrCol + Count < Constance.nCols; Count++)
             {
                 if (MatrixPositions[CurrRow][CurrCol + Count].BackgroundImage == ListPlayers[0].Symbol)
@@ -597,7 +619,7 @@ namespace Game_Caro
                     break;
             }
 
-            // Duyệt từ phải sang trái
+            // Duy?t t? ph?i sang tr�i
             for (int Count = 1; Count < 6 && CurrCol - Count >= 0; Count++)
             {
                 if (MatrixPositions[CurrRow][CurrCol - Count].BackgroundImage == ListPlayers[0].Symbol)
@@ -614,8 +636,8 @@ namespace Game_Caro
             if (ManCells == 2)
                 return 0;
 
-            /* Nếu ManCells == 1 => bị chặn 1 đầu => lấy điểm phòng ngự tại vị trí này nhưng 
-            nên cộng thêm 1 để tăng phòng ngự cho máy cảnh giác hơn vì đã bị chặn 1 đầu */
+            /* N?u ManCells == 1 => b? ch?n 1 ??u => l?y ?i?m ph�ng ng? t?i v? tr� n�y nh?ng 
+            n�n c?ng th�m 1 ?? t?ng ph�ng ng?a cho m�y c?nh gi�c h?n v� ?� b? ch?n 1 ??u */
 
             TotalScore -= ArrDefenseScore[ManCells + 1];
             TotalScore += ArrAttackScore[ComCells];
@@ -629,7 +651,7 @@ namespace Game_Caro
             int ComCells = 0;
             int ManCells = 0;
 
-            // Duyệt trái trên
+            // Duy?t tr�i tr�n
             for (int Count = 1; Count < 6 && CurrCol + Count < Constance.nCols && CurrRow + Count < Constance.nRows; Count++)
             {
                 if (MatrixPositions[CurrRow + Count][CurrCol + Count].BackgroundImage == ListPlayers[0].Symbol)
@@ -643,7 +665,7 @@ namespace Game_Caro
                     break;
             }
 
-            // Duyệt phải dưới
+            // Duy?t ph?i d??i
             for (int Count = 1; Count < 6 && CurrCol - Count >= 0 && CurrRow - Count >= 0; Count++)
             {
                 if (MatrixPositions[CurrRow - Count][CurrCol - Count].BackgroundImage == ListPlayers[0].Symbol)
@@ -660,8 +682,8 @@ namespace Game_Caro
             if (ManCells == 2)
                 return 0;
 
-            /* Nếu ManCells == 1 => bị chặn 1 đầu => lấy điểm phòng ngự tại vị trí này nhưng 
-            nên cộng thêm 1 để tăng phòng ngự cho máy cảnh giác hơn vì đã bị chặn 1 đầu */
+            /* N?u ManCells == 1 => b? ch?n 1 ??u => l?y ?i?m ph�ng ng? t?i v? tr� n�y nh?ng 
+            n�n c?ng th�m 1 ?? t?ng ph�ng ng?a cho m�y c?nh gi�c h?n v� ?� b? ch?n 1 ??u */
 
             TotalScore -= ArrDefenseScore[ManCells + 1];
             TotalScore += ArrAttackScore[ComCells];
@@ -675,7 +697,7 @@ namespace Game_Caro
             int ComCells = 0;
             int ManCells = 0;
 
-            // Duyệt phải trên
+            // Duy?t ph?i tr�n
             for (int Count = 1; Count < 6 && CurrCol + Count < Constance.nCols && CurrRow - Count >= 0; Count++)
             {
                 if (MatrixPositions[CurrRow - Count][CurrCol + Count].BackgroundImage == ListPlayers[0].Symbol)
@@ -689,7 +711,7 @@ namespace Game_Caro
                     break;
             }
 
-            // Duyệt trái dưới
+            // Duy?t tr�i d??i
             for (int Count = 1; Count < 6 && CurrCol - Count >= 0 && CurrRow + Count < Constance.nRows; Count++)
             {
                 if (MatrixPositions[CurrRow + Count][CurrCol - Count].BackgroundImage == ListPlayers[0].Symbol)
@@ -706,8 +728,8 @@ namespace Game_Caro
             if (ManCells == 2)
                 return 0;
 
-            /* Nếu ManCells == 1 => bị chặn 1 đầu => lấy điểm phòng ngự tại vị trí này nhưng 
-            nên cộng thêm 1 để tăng phòng ngự cho máy cảnh giác hơn vì đã bị chặn 1 đầu */
+            /* N?u ManCells == 1 => b? ch?n 1 ??u => l?y ?i?m ph�ng ng? t?i v? tr� n�y nh?ng 
+            n�n c?ng th�m 1 ?? t?ng ph�ng ng?a cho m�y c?nh gi�c h?n v� ?� b? ch?n 1 ??u */
 
             TotalScore -= ArrDefenseScore[ManCells + 1];
             TotalScore += ArrAttackScore[ComCells];
@@ -723,7 +745,7 @@ namespace Game_Caro
             int ComCells = 0;
             int ManCells = 0;
 
-            // Duyệt từ trên xuống
+            // Duy?t t? tr�n xu?ng
             for (int Count = 1; Count < 6 && CurrRow + Count < Constance.nRows; Count++)
             {
                 if (MatrixPositions[CurrRow + Count][CurrCol].BackgroundImage == ListPlayers[0].Symbol)
@@ -737,7 +759,7 @@ namespace Game_Caro
                     break;
             }
 
-            // Duyệt từ dưới lên
+            // Duy?t t? d??i l�n
             for (int Count = 1; Count < 6 && CurrRow - Count >= 0; Count++)
             {
                 if (MatrixPositions[CurrRow - Count][CurrCol].BackgroundImage == ListPlayers[0].Symbol)
@@ -765,7 +787,7 @@ namespace Game_Caro
             int ComCells = 0;
             int ManCells = 0;
 
-            // Duyệt từ trái sang phải
+            // Duy?t t? tr�i sang ph?i
             for (int Count = 1; Count < 6 && CurrCol + Count < Constance.nCols; Count++)
             {
                 if (MatrixPositions[CurrRow][CurrCol + Count].BackgroundImage == ListPlayers[0].Symbol)
@@ -779,7 +801,7 @@ namespace Game_Caro
                     break;
             }
 
-            // Duyệt từ phải sang trái
+            // Duy?t t? ph?i sang tr�i
             for (int Count = 1; Count < 6 && CurrCol - Count >= 0; Count++)
             {
                 if (MatrixPositions[CurrRow][CurrCol - Count].BackgroundImage == ListPlayers[0].Symbol)
@@ -807,7 +829,7 @@ namespace Game_Caro
             int ComCells = 0;
             int ManCells = 0;
 
-            // Duyệt trái trên
+            // Duy?t tr�i tr�n
             for (int Count = 1; Count < 6 && CurrCol + Count < Constance.nCols && CurrRow + Count < Constance.nRows; Count++)
             {
                 if (MatrixPositions[CurrRow + Count][CurrCol + Count].BackgroundImage == ListPlayers[0].Symbol)
@@ -821,7 +843,7 @@ namespace Game_Caro
                     break;
             }
 
-            // Duyệt phải dưới
+            // Duy?t ph?i d??i
             for (int Count = 1; Count < 6 && CurrCol - Count >= 0 && CurrRow - Count >= 0; Count++)
             {
                 if (MatrixPositions[CurrRow - Count][CurrCol - Count].BackgroundImage == ListPlayers[0].Symbol)
@@ -849,7 +871,7 @@ namespace Game_Caro
             int ComCells = 0;
             int ManCells = 0;
 
-            // Duyệt phải trên
+            // Duy?t ph?i tr�n
             for (int Count = 1; Count < 6 && CurrCol + Count < Constance.nCols && CurrRow - Count >= 0; Count++)
             {
                 if (MatrixPositions[CurrRow - Count][CurrCol + Count].BackgroundImage == ListPlayers[0].Symbol)
@@ -863,7 +885,7 @@ namespace Game_Caro
                     break;
             }
 
-            // Duyệt trái dưới
+            // Duy?t tr�i d??i
             for (int Count = 1; Count < 6 && CurrCol - Count >= 0 && CurrRow + Count < Constance.nRows; Count++)
             {
                 if (MatrixPositions[CurrRow + Count][CurrCol - Count].BackgroundImage == ListPlayers[0].Symbol)
@@ -917,13 +939,121 @@ namespace Game_Caro
         {
             IsAI = true;
 
-            if (StkUndoStep.Count == 0) // mới bắt đầu thì cho đánh giữa bàn cờ
-                MatrixPositions[Constance.nRows / 4][Constance.nCols / 4].PerformClick();
-            else
+            try
             {
-                Point AiPos = FindAiPos();
-                MatrixPositions[AiPos.X][AiPos.Y].PerformClick();
+                // ??m b?o UI thread ???c ?u ti�n tr??c khi ?�nh
+                Application.DoEvents();
+                
+                Point movePosition;
+                Random rand = new Random();
+                
+                if (StkUndoStep.Count == 0) 
+                {
+                    // T?o n??c ?i ??u ti�n ng?u nhi�n thay v� lu�n ? g?n gi?a b�n c?
+                    
+                    // Ph??ng ph�p 1: Chia b�n c? th�nh 9 khu v?c v� ch?n ng?u nhi�n m?t khu v?c
+                    // r?i ch?n m?t ?i?m ng?u nhi�n trong khu v?c ?�
+                    int regionWidth = Math.Max(1, Constance.nCols / 3);
+                    int regionHeight = Math.Max(1, Constance.nRows / 3);
+                    
+                    int region = rand.Next(9); // 0-8 (3x3 regions)
+                    
+                    // X�c ??nh v? tr� d?a tr�n khu v?c ???c ch?n
+                    int baseRow = (region / 3) * regionHeight;
+                    int baseCol = (region % 3) * regionWidth;
+                    
+                    // Th�m m?t ch�t ng?u nhi�n th?c s? trong khu v?c
+                    int row = Math.Min(Constance.nRows - 1, baseRow + rand.Next(regionHeight));
+                    int col = Math.Min(Constance.nCols - 1, baseCol + rand.Next(regionWidth));
+                    
+                    // ??m b?o v? tr� n?m trong gi?i h?n b�n c?
+                    row = Math.Max(0, Math.Min(Constance.nRows - 1, row));
+                    col = Math.Max(0, Math.Min(Constance.nCols - 1, col));
+                    
+                    // Ph??ng ph�p 2: N?u b�n c? nh?, ch?n ng?u nhi�n ho�n to�n
+                    if (Constance.nRows <= 5 || Constance.nCols <= 5)
+                    {
+                        row = rand.Next(Constance.nRows);
+                        col = rand.Next(Constance.nCols);
+                    }
+                    
+                    movePosition = new Point(col, row);
+                }
+                else
+                {
+                    // T�m n??c ?i t?t nh?t cho AI
+                    Point AiPos = FindAiPos();
+                    movePosition = new Point(AiPos.Y, AiPos.X);
+                }
+                
+                // ??m b?o v? tr� h?p l? v� � ch?a ???c ?�nh
+                if (movePosition.X >= 0 && movePosition.X < Constance.nCols && 
+                    movePosition.Y >= 0 && movePosition.Y < Constance.nRows &&
+                    MatrixPositions[movePosition.Y][movePosition.X].BackgroundImage == null)
+                {
+                    // Tr?c ti?p ??t n??c ?i v�o b�n c?
+                    Button btn = MatrixPositions[movePosition.Y][movePosition.X];
+                    btn.BackgroundImage = ListPlayers[CurrentPlayer].Symbol;
+                    
+                    StkUndoStep.Push(new PlayInfo(movePosition, CurrentPlayer, btn.BackgroundImage));
+                    StkRedoStep.Clear();
+                    
+                    CurrentPlayer = CurrentPlayer == 1 ? 0 : 1;
+                    ChangePlayer();
+                    
+                    // Th�ng b�o r?ng n??c ?i ?� ???c th?c hi?n
+                    if (playerClicked != null)
+                        playerClicked(this, new BtnClickEvent(movePosition));
+                    
+                    // Ki?m tra k?t th�c game
+                    if (IsEndGame())
+                        EndGame();
+                }
+                else
+                {
+                    // N?u v? tr� ?� ch?n kh�ng h?p l?, t�m m?t � tr?ng ng?u nhi�n
+                    List<Point> emptyPositions = new List<Point>();
+                    
+                    for (int i = 0; i < Constance.nRows; i++)
+                    {
+                        for (int j = 0; j < Constance.nCols; j++)
+                        {
+                            if (MatrixPositions[i][j].BackgroundImage == null)
+                            {
+                                emptyPositions.Add(new Point(j, i));
+                            }
+                        }
+                    }
+                    
+                    if (emptyPositions.Count > 0)
+                    {
+                        // Ch?n m?t v? tr� ng?u nhi�n t? c�c � tr?ng
+                        Point randomPos = emptyPositions[rand.Next(emptyPositions.Count)];
+                        
+                        Button btn = MatrixPositions[randomPos.Y][randomPos.X];
+                        btn.BackgroundImage = ListPlayers[CurrentPlayer].Symbol;
+                        
+                        StkUndoStep.Push(new PlayInfo(randomPos, CurrentPlayer, btn.BackgroundImage));
+                        StkRedoStep.Clear();
+                        
+                        CurrentPlayer = CurrentPlayer == 1 ? 0 : 1;
+                        ChangePlayer();
+                        
+                        if (playerClicked != null)
+                            playerClicked(this, new BtnClickEvent(randomPos));
+                        
+                        if (IsEndGame())
+                            EndGame();
+                    }
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Kh�ng th? th?c hi?n n??c ?i c?a m�y: " + ex.Message, 
+                    "L?i", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
+            IsAI = false;
         }
         #endregion
         #endregion

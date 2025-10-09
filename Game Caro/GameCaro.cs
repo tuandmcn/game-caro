@@ -147,7 +147,39 @@ namespace Game_Caro
         {
             board.PlayMode = 3;
             pn_GameBoard.Enabled = true;
-            board.StartAI();
+            
+            // Show dialog to choose who goes first
+            using (AIFirstMoveForm aiFirstMoveForm = new AIFirstMoveForm())
+            {
+                if (aiFirstMoveForm.ShowDialog() == DialogResult.OK)
+                {
+                    // Set the property on the board
+                    board.AIGoesFirst = aiFirstMoveForm.AIGoesFirst;
+                    
+                    // Nếu AI đi trước, thì cho AI đi ngay lập tức
+                    if (board.AIGoesFirst)
+                    {
+                        // Đảm bảo mọi thứ được render xong
+                        this.Refresh();
+                        Application.DoEvents();
+                        
+                        // Trực tiếp gọi StartAI
+                        board.StartAI();
+                    }
+                }
+                else
+                {
+                    // Mặc định - AI đi trước nếu người chơi hủy dialog
+                    board.AIGoesFirst = true;
+                    
+                    // Đảm bảo mọi thứ được render xong
+                    this.Refresh();
+                    Application.DoEvents();
+                    
+                    // Trực tiếp gọi StartAI
+                    board.StartAI();
+                }
+            }
         }
         
         // Keep the original constructor for compatibility, though it won't be used anymore
@@ -358,6 +390,17 @@ namespace Game_Caro
                 
             pn_GameBoard.Enabled = true;
             
+            // Nếu đang ở chế độ chơi với máy và máy đi trước, thực hiện nước đi của máy
+            if (board.PlayMode == 3 && board.AIGoesFirst)
+            {
+                // Đảm bảo form được hiển thị đầy đủ
+                this.Refresh();
+                Application.DoEvents();
+                
+                // Cho máy đi nước đầu tiên
+                board.StartAI();
+            }
+            
             // Thông báo cho người dùng biết có thể thay đổi cài đặt
             MessageBox.Show("Ván mới đã được tạo. Bạn có thể thay đổi kích thước bàn cờ trong menu Options > Settings trước khi bắt đầu đánh.", 
                 "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -437,13 +480,21 @@ namespace Game_Caro
                     socket.Send(new SocketData((int)SocketCommand.QUIT, "", new Point()));
                 } catch { }
 
-                    socket.CloseConnect();
-                    MessageBox.Show("Disconnected from LAN.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                socket.CloseConnect();
+                MessageBox.Show("Disconnected from LAN.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
+            // Lưu lại trạng thái AI đi trước nếu đã từng chơi với AI
+            bool previousAIGoesFirst = board.PlayMode == 3 ? board.AIGoesFirst : true;
+            
             board.PlayMode = 3;
             NewGame();
-            board.StartAI();
+            
+            // Đặt lại trạng thái AI đi trước đã lưu
+            board.AIGoesFirst = previousAIGoesFirst;
+            
+            // Hiển thị dialog chọn người đi trước 
+            SetupAiGame();
         }
 
         private void SettingsToolStripMenuItem_Click(object sender, EventArgs e)
