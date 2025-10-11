@@ -400,13 +400,13 @@ namespace Game_Caro
                 // Cho máy đi nước đầu tiên
                 board.StartAI();
             }
-            
-            // Thông báo cho người dùng biết có thể thay đổi cài đặt
-            MessageBox.Show("Ván mới đã được tạo. Bạn có thể thay đổi kích thước bàn cờ trong menu Options > Settings trước khi bắt đầu đánh.", 
-                "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
 
-        private void UndoToolStripMenuItem_Click(object sender, EventArgs e)
+			// Thông báo cho người dùng biết có thể thay đổi cài đặt
+			MessageBox.Show("A new game has been created. You can change the board size in Options > Settings before starting a match.",
+				"Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
+		}
+
+		private void UndoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             pgb_CountDown.Value = 0;
             board.Undo();

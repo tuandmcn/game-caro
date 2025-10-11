@@ -294,8 +294,16 @@ namespace Game_Caro
 
         public bool Redo()
         {
-            if (StkRedoStep.Count <= 0)
-                return false;
+			//if (StkRedoStep.Count <= 0)
+			//    return false;
+			if (StkRedoStep.Count <= 0)
+			{
+				MessageBox.Show("You must Undo before you can Redo.",
+								"Notification",
+								MessageBoxButtons.OK,
+								MessageBoxIcon.Information);
+				return false;
+			}
 
 			// Gi?i h?n t?ng s? l?n UNDO+REDO theo ch? ?? ch?i
 			int actor = this.CurrentPlayer;               // ng??i ?ang t?i l??t b?m Redo
