@@ -91,9 +91,9 @@
             this.pn_GameBoard.BackColor = System.Drawing.Color.DeepSkyBlue;
             this.pn_GameBoard.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pn_GameBoard.Location = new System.Drawing.Point(13, 41);
-            this.pn_GameBoard.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pn_GameBoard.Margin = new System.Windows.Forms.Padding(2);
             this.pn_GameBoard.Name = "pn_GameBoard";
-            this.pn_GameBoard.Size = new System.Drawing.Size(630, 611);
+            this.pn_GameBoard.Size = new System.Drawing.Size(630, 597);
             this.pn_GameBoard.TabIndex = 0;
             // 
             // panel1
@@ -102,7 +102,7 @@
             this.panel1.BackColor = System.Drawing.Color.Transparent;
             this.panel1.Controls.Add(this.pb_Logo);
             this.panel1.Location = new System.Drawing.Point(656, 41);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(300, 102);
             this.panel1.TabIndex = 1;
@@ -115,7 +115,7 @@
             this.pb_Logo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pb_Logo.InitialImage = null;
             this.pb_Logo.Location = new System.Drawing.Point(0, 0);
-            this.pb_Logo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pb_Logo.Margin = new System.Windows.Forms.Padding(2);
             this.pb_Logo.Name = "pb_Logo";
             this.pb_Logo.Size = new System.Drawing.Size(300, 102);
             this.pb_Logo.TabIndex = 0;
@@ -129,7 +129,7 @@
             this.panel2.Controls.Add(this.txt_PlayerName);
             this.panel2.Controls.Add(this.pb_Avatar);
             this.panel2.Location = new System.Drawing.Point(656, 149);
-            this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(300, 146);
             this.panel2.TabIndex = 1;
@@ -142,9 +142,9 @@
             this.Grb_About.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Grb_About.ForeColor = System.Drawing.Color.Lime;
             this.Grb_About.Location = new System.Drawing.Point(155, 0);
-            this.Grb_About.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Grb_About.Margin = new System.Windows.Forms.Padding(2);
             this.Grb_About.Name = "Grb_About";
-            this.Grb_About.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Grb_About.Padding = new System.Windows.Forms.Padding(2);
             this.Grb_About.Size = new System.Drawing.Size(145, 117);
             this.Grb_About.TabIndex = 0;
             this.Grb_About.TabStop = false;
@@ -154,7 +154,7 @@
             // 
             this.panel3.Controls.Add(this.lbl_About);
             this.panel3.Location = new System.Drawing.Point(0, 17);
-            this.panel3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel3.Margin = new System.Windows.Forms.Padding(2);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(145, 95);
             this.panel3.TabIndex = 0;
@@ -178,7 +178,7 @@
             this.txt_PlayerName.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_PlayerName.ForeColor = System.Drawing.Color.DarkBlue;
             this.txt_PlayerName.Location = new System.Drawing.Point(155, 122);
-            this.txt_PlayerName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txt_PlayerName.Margin = new System.Windows.Forms.Padding(2);
             this.txt_PlayerName.Name = "txt_PlayerName";
             this.txt_PlayerName.ReadOnly = true;
             this.txt_PlayerName.Size = new System.Drawing.Size(146, 26);
@@ -191,7 +191,7 @@
             this.pb_Avatar.BackgroundImage = global::Game_Caro.Properties.Resources.Quan;
             this.pb_Avatar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pb_Avatar.Location = new System.Drawing.Point(0, 0);
-            this.pb_Avatar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pb_Avatar.Margin = new System.Windows.Forms.Padding(2);
             this.pb_Avatar.Name = "pb_Avatar";
             this.pb_Avatar.Size = new System.Drawing.Size(149, 146);
             this.pb_Avatar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -216,7 +216,7 @@
             this.panel4.Controls.Add(this.btn_SameCom);
             this.panel4.Controls.Add(this.btn_LAN);
             this.panel4.Location = new System.Drawing.Point(656, 301);
-            this.panel4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.panel4.Margin = new System.Windows.Forms.Padding(2);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(300, 138);
             this.panel4.TabIndex = 1;
@@ -229,7 +229,7 @@
             this.txt_IP.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_IP.ForeColor = System.Drawing.Color.Blue;
             this.txt_IP.Location = new System.Drawing.Point(155, 1);
-            this.txt_IP.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txt_IP.Margin = new System.Windows.Forms.Padding(2);
             this.txt_IP.Name = "txt_IP";
             this.txt_IP.ReadOnly = true;
             this.txt_IP.Size = new System.Drawing.Size(193, 26);
@@ -246,7 +246,7 @@
             this.btn_Undo.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Undo.ForeColor = System.Drawing.Color.White;
             this.btn_Undo.Location = new System.Drawing.Point(0, 106);
-            this.btn_Undo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_Undo.Margin = new System.Windows.Forms.Padding(2);
             this.btn_Undo.Name = "btn_Undo";
             this.btn_Undo.Size = new System.Drawing.Size(72, 32);
             this.btn_Undo.TabIndex = 3;
@@ -260,7 +260,7 @@
             this.pgb_CountDown.BackColor = System.Drawing.Color.Lime;
             this.pgb_CountDown.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.pgb_CountDown.Location = new System.Drawing.Point(0, 1);
-            this.pgb_CountDown.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pgb_CountDown.Margin = new System.Windows.Forms.Padding(2);
             this.pgb_CountDown.Name = "pgb_CountDown";
             this.pgb_CountDown.Size = new System.Drawing.Size(149, 24);
             this.pgb_CountDown.TabIndex = 2;
@@ -275,7 +275,7 @@
             this.btn_Redo.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Redo.ForeColor = System.Drawing.Color.White;
             this.btn_Redo.Location = new System.Drawing.Point(77, 106);
-            this.btn_Redo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_Redo.Margin = new System.Windows.Forms.Padding(2);
             this.btn_Redo.Name = "btn_Redo";
             this.btn_Redo.Size = new System.Drawing.Size(72, 32);
             this.btn_Redo.TabIndex = 3;
@@ -293,7 +293,7 @@
             this.btn_AI.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_AI.ForeColor = System.Drawing.Color.White;
             this.btn_AI.Location = new System.Drawing.Point(155, 106);
-            this.btn_AI.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_AI.Margin = new System.Windows.Forms.Padding(2);
             this.btn_AI.Name = "btn_AI";
             this.btn_AI.Size = new System.Drawing.Size(145, 32);
             this.btn_AI.TabIndex = 3;
@@ -308,7 +308,7 @@
             this.pictureBox1.BackgroundImage = global::Game_Caro.Properties.Resources.banner;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox1.Location = new System.Drawing.Point(0, 31);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(149, 70);
             this.pictureBox1.TabIndex = 0;
@@ -324,7 +324,7 @@
             this.btn_SameCom.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_SameCom.ForeColor = System.Drawing.Color.White;
             this.btn_SameCom.Location = new System.Drawing.Point(155, 68);
-            this.btn_SameCom.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_SameCom.Margin = new System.Windows.Forms.Padding(2);
             this.btn_SameCom.Name = "btn_SameCom";
             this.btn_SameCom.Size = new System.Drawing.Size(145, 32);
             this.btn_SameCom.TabIndex = 3;
@@ -343,7 +343,7 @@
             this.btn_LAN.Font = new System.Drawing.Font("Arial", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_LAN.ForeColor = System.Drawing.Color.White;
             this.btn_LAN.Location = new System.Drawing.Point(155, 31);
-            this.btn_LAN.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_LAN.Margin = new System.Windows.Forms.Padding(2);
             this.btn_LAN.Name = "btn_LAN";
             this.btn_LAN.Size = new System.Drawing.Size(145, 32);
             this.btn_LAN.TabIndex = 3;
@@ -360,8 +360,8 @@
             // 
             this.txt_Message.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.txt_Message.Font = new System.Drawing.Font("Arial", 12F);
-            this.txt_Message.Location = new System.Drawing.Point(656, 626);
-            this.txt_Message.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txt_Message.Location = new System.Drawing.Point(656, 612);
+            this.txt_Message.Margin = new System.Windows.Forms.Padding(2);
             this.txt_Message.Name = "txt_Message";
             this.txt_Message.Size = new System.Drawing.Size(243, 26);
             this.txt_Message.TabIndex = 4;
@@ -376,8 +376,8 @@
             this.btn_Send.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btn_Send.Font = new System.Drawing.Font("Arial", 10.5F, System.Drawing.FontStyle.Bold);
             this.btn_Send.ForeColor = System.Drawing.Color.White;
-            this.btn_Send.Location = new System.Drawing.Point(903, 627);
-            this.btn_Send.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_Send.Location = new System.Drawing.Point(903, 614);
+            this.btn_Send.Margin = new System.Windows.Forms.Padding(2);
             this.btn_Send.Name = "btn_Send";
             this.btn_Send.Size = new System.Drawing.Size(53, 24);
             this.btn_Send.TabIndex = 3;
@@ -549,14 +549,14 @@
             this.txt_Chat.Font = new System.Drawing.Font("Arial", 11F);
             this.txt_Chat.ForeColor = System.Drawing.Color.DarkBlue;
             this.txt_Chat.Location = new System.Drawing.Point(656, 444);
-            this.txt_Chat.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txt_Chat.Margin = new System.Windows.Forms.Padding(2);
             this.txt_Chat.Multiline = true;
             this.txt_Chat.Name = "txt_Chat";
             this.txt_Chat.ReadOnly = true;
             this.txt_Chat.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txt_Chat.Size = new System.Drawing.Size(301, 171);
+            this.txt_Chat.Size = new System.Drawing.Size(301, 164);
             this.txt_Chat.TabIndex = 4;
-            this.txt_Chat.Text = "- Player 1: Người chơi số 1";
+            this.txt_Chat.Text = "- Player 1: Người chơi 1";
             // 
             // GameCaro
             // 
@@ -565,7 +565,7 @@
             this.BackColor = System.Drawing.Color.PowderBlue;
             this.BackgroundImage = global::Game_Caro.Properties.Resources.background_main;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(970, 663);
+            this.ClientSize = new System.Drawing.Size(970, 646);
             this.Controls.Add(this.txt_Chat);
             this.Controls.Add(this.txt_Message);
             this.Controls.Add(this.panel4);
@@ -575,7 +575,7 @@
             this.Controls.Add(this.pn_GameBoard);
             this.Controls.Add(this.menuStrip);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "GameCaro";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Game Caro ";
