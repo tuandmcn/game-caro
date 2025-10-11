@@ -333,17 +333,17 @@ namespace Game_Caro
 				string msg;
 				if (board.PlayMode == 3) // Chơi với máy (AI)
 				{
-					// Trong code hiện tại AI là người chơi 0, bạn là 1
-					msg = (winnerIdx == 0) ? "Máy thắng!" : "Bạn thắng!";
+					int aiIndex = board.AIGoesFirst ? 0 : 1;
+					msg = (winnerIdx == aiIndex) ? "Computer wins!" : "You win!";
 				}
 				else
 				{
 					// 2 người trên cùng máy hoặc qua LAN: hiển thị tên người thắng
 					string winnerName = board.ListPlayers[winnerIdx].Name;
-					msg = $"\"{winnerName}\" thắng!";
+					msg = $"\"{winnerName}\" wins!";
 				}
 
-				MessageBox.Show(msg, "Kết quả", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				MessageBox.Show(msg, "Result", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			}
 
 			EndGame();  // dừng đồng hồ, khóa bàn cờ

@@ -254,8 +254,9 @@ namespace Game_Caro
 
 			if (opCount[actor] >= OP_LIMIT)
 			{
-				MessageBox.Show($"B?n ?ã dùng h?t {OP_LIMIT} l?n UNDO/REDO.",
-								"Gi?i h?n", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				MessageBox.Show($"You have used all {OP_LIMIT} UNDO/REDO operations.",
+				"Limit reached", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
 				return false;
 			}
 			opCount[actor]++; // ghi nh?n m?t l?n thao tác Undo/Redo
@@ -302,8 +303,9 @@ namespace Game_Caro
 
 			if (opCount[actor] >= OP_LIMIT)
 			{
-				MessageBox.Show($"B?n ?ã dùng h?t {OP_LIMIT} l?n UNDO/REDO.",
-								"Gi?i h?n", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				MessageBox.Show($"You have used all {OP_LIMIT} UNDO/REDO operations.",
+				"Limit reached", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
 				return false;
 			}
 			opCount[actor]++; // ghi nh?n m?t l?n thao tác Undo/Redo
