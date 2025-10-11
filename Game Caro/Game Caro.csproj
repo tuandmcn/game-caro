@@ -50,6 +50,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AIFirstMoveForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="BtnClickEvent.cs" />
     <Compile Include="Constance.cs" />
     <Compile Include="ContactMe.cs">
