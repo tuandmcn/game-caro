@@ -2,16 +2,15 @@
 {
     class Constance
     {
-        //Do rong cua o co
+        // Default cell size
         public static int CellWidth = 35;
-        //Chieu cao cua o co
         public static int CellHeight = 35;
 
-        //So dong ban co
-        public static int nRows = 22;
-        //So cot ban co
-        public static int nCols = 40;
+        // Default board dimensions (will be set from board size)
+        public static int nRows = 10;
+        public static int nCols = 10;
 
+        // Countdown settings
         public static int CountDownStep = 100;
         public static int CountDownTime = 10000;
         public static int CountDownInterval = 100;
