@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Net.NetworkInformation;
 using System.Threading;
 using System.Windows.Forms;
+using TicTacToe;
 
 namespace Game_Caro
 {
@@ -55,7 +56,7 @@ namespace Game_Caro
             txt_IP.ReadOnly = true;
 
             // Update form title to show board size and cells to win
-            this.Text = $"Game Caro - Bàn cờ {BoardSize}x{BoardSize} - Thắng {board.CellsToWin} ô liên tiếp";
+            this.Text = $"Tic Tac Toe - Bàn cờ {BoardSize}x{BoardSize} - Thắng {board.CellsToWin} ô liên tiếp";
 
             // Set up the chat availability based on game mode
             SetChatAvailability(gameMode);
@@ -251,7 +252,7 @@ namespace Game_Caro
             AdjustBoardPanelSize();
             
             // Cập nhật tiêu đề của form để hiển thị kích thước bàn cờ mới
-            this.Text = $"Game Caro - Bàn cờ {BoardSize}x{BoardSize} - Thắng {board.CellsToWin} ô liên tiếp";
+            this.Text = $"Tic Tac Toe - Bàn cờ {BoardSize}x{BoardSize} - Thắng {board.CellsToWin} ô liên tiếp";
 
             board.DrawGameBoard();
         }
