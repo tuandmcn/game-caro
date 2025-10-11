@@ -155,9 +155,46 @@ namespace Game_Caro
                 {
                     // Set the property on the board
                     board.AIGoesFirst = aiFirstMoveForm.AIGoesFirst;
-                    
-                    // Nếu AI đi trước, thì cho AI đi ngay lập tức
-                    if (board.AIGoesFirst)
+					var humanAvatar = Image.FromFile(Application.StartupPath + @"\images\Quan.jpg"); // hoặc ảnh người sẵn có
+					var aiAvatar = Image.FromFile(Application.StartupPath + @"\images\robot.jpg"); // hoặc ảnh máy sẵn có
+
+					if (board.AIGoesFirst)
+					{
+						// AI là player 0, Human là player 1
+						board.ListPlayers[0].Name = "Computer";
+						board.ListPlayers[0].Avatar = aiAvatar;
+
+						board.ListPlayers[1].Name = "You";
+						board.ListPlayers[1].Avatar = humanAvatar;
+
+						board.CurrentPlayer = 0; // lượt hiện tại là AI
+					}
+					else
+					{
+						// Human là player 0, AI là player 1
+						board.ListPlayers[0].Name = "You";
+						board.ListPlayers[0].Avatar = humanAvatar;
+
+						board.ListPlayers[1].Name = "Computer";
+						board.ListPlayers[1].Avatar = aiAvatar;
+
+						board.CurrentPlayer = 0; // lượt hiện tại là You
+					}
+
+					// ✅ gọi lại logic 2-player để cập nhật ảnh/tên ở UI
+					board.RefreshCurrentPlayerUI();
+
+					// Nếu AI đi trước thì để UI render xong rồi mới cho AI đi
+					if (board.AIGoesFirst)
+					{
+						this.Refresh();
+						Application.DoEvents();
+						board.StartAI();
+					}
+
+
+					// Nếu AI đi trước, thì cho AI đi ngay lập tức
+					if (board.AIGoesFirst)
                     {
                         // Đảm bảo mọi thứ được render xong
                         this.Refresh();

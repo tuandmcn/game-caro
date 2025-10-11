@@ -508,7 +508,13 @@ namespace Game_Caro
             Avatar.Image = ListPlayers[CurrentPlayer].Avatar;
         }
 
-        private void btn_Click(object sender, EventArgs e)
+		// Tái dùng logic c?a ch? ?? 2 ng??i
+		public void RefreshCurrentPlayerUI()
+		{
+			PlayerName.Text = ListPlayers[CurrentPlayer].Name;
+			Avatar.Image = ListPlayers[CurrentPlayer].Avatar;
+		}
+		private void btn_Click(object sender, EventArgs e)
         {
             Button btn = sender as Button;
 
