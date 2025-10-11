@@ -1,3 +1,7 @@
-/Game Caro/bin/Debug
-/Game Caro/obj/Debug
-*.suo
+################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+/.vs/Game Caro/v16/.suo
+/.vs
+/Game Caro/bin/
+/Game Caro/obj/
