@@ -562,10 +562,10 @@ namespace Game_Caro
             }
             else
             {
-                MessageBox.Show("Bạn cần kết thúc ván chơi hiện tại hoặc bắt đầu ván mới trước khi thay đổi cài đặt!", 
-                    "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
+				MessageBox.Show("You need to finish the current game or start a new one before changing the settings!",
+				"Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			}
+		}
 
         private void HowToPlayToolStripMenuItem_Click(object sender, EventArgs e)
         {

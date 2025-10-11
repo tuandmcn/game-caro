@@ -38,11 +38,11 @@ namespace Game_Caro
         {
             int boardSize = (int)numBoardSize.Value;
             int cellsToWin = (boardSize <= 5) ? 3 : 5;
-            
-            lblBoardSizeInfo.Text = $"(th?ng {cellsToWin} ô liên ti?p ?? th?ng)";
-        }
 
-        private void btnApply_Click(object sender, EventArgs e)
+			lblBoardSizeInfo.Text = $"(win {cellsToWin} in a row to win)";
+		}
+
+		private void btnApply_Click(object sender, EventArgs e)
         {
             int newBoardSize = (int)numBoardSize.Value;
             
@@ -51,8 +51,9 @@ namespace Game_Caro
             {
                 BoardSizeChanged?.Invoke(this, new BoardSizeChangedEventArgs(newBoardSize));
                 currentBoardSize = newBoardSize;
-                MessageBox.Show("Thay ??i s? ???c áp d?ng khi b?t ??u ván ch?i m?i.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+				MessageBox.Show("Changes will take effect when a new game starts.", "Notification", MessageBoxButtons.OK,
+								   MessageBoxIcon.Information);
+			}
             
             DialogResult = DialogResult.OK;
         }
@@ -60,6 +61,11 @@ namespace Game_Caro
         private void btnCancel_Click(object sender, EventArgs e)
         {
             DialogResult = DialogResult.Cancel;
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 
