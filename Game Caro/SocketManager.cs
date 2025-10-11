@@ -53,7 +53,9 @@ namespace Game_Caro
 
         private bool SendData(Socket target, byte[] data)
         {
-            return target.Send(data) == 1;
+            if (target != null)
+                return target.Send(data) == 1;
+            return false;
         }
 
         private bool ReceiveData(Socket target, byte[] data)
