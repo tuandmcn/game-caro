@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace Game_Caro
+namespace TicTacToe
 {
     class Player
     {

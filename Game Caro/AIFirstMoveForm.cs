@@ -2,7 +2,7 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace Game_Caro
+namespace TicTacToe
 {
     public partial class AIFirstMoveForm : Form
     {

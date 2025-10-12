@@ -1,5 +1,5 @@
 ﻿
-namespace Game_Caro
+namespace TicTacToe
 {
     partial class frmAbout
     {

@@ -5,7 +5,7 @@ using System.Threading;
 using System.Windows.Forms;
 using TicTacToe;
 
-namespace Game_Caro
+namespace TicTacToe
 {
     partial class GameCaro : Form
     {

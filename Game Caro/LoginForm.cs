@@ -2,7 +2,7 @@
 using System.Net.NetworkInformation;
 using System.Windows.Forms;
 
-namespace Game_Caro
+namespace TicTacToe
 {
     public partial class LoginForm : Form
     {
