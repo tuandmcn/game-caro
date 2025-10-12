@@ -156,7 +156,7 @@ namespace Game_Caro
                     // Set the property on the board
                     board.AIGoesFirst = aiFirstMoveForm.AIGoesFirst;
 					var humanAvatar = Image.FromFile(Application.StartupPath + @"\images\Quan.jpg"); // hoặc ảnh người sẵn có
-					var aiAvatar = Image.FromFile(Application.StartupPath + @"\images\robot.jpg"); // hoặc ảnh máy sẵn có
+					var aiAvatar = Image.FromFile(Application.StartupPath + @"\images\Lisa.jpg"); // hoặc ảnh máy sẵn có
 
 					if (board.AIGoesFirst)
 					{
