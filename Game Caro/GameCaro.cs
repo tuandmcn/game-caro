@@ -3,7 +3,6 @@ using System.Drawing;
 using System.Net.NetworkInformation;
 using System.Threading;
 using System.Windows.Forms;
-using TicTacToe;
 
 namespace TicTacToe
 {
