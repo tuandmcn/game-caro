@@ -48,7 +48,7 @@ namespace TicTacToe
             int boardSize = (int)numBoardSize.Value;
             int cellsToWin = (boardSize <= 5) ? 3 : 5;
             
-            lblBoardSizeInfo.Text = $"(thắng {cellsToWin} liên tiếp để thắng)";
+            lblBoardSizeInfo.Text = $"(Win {cellsToWin} in a row to win)";
         }
 
         private void btn_HostGame_Click(object sender, EventArgs e)
@@ -90,7 +90,7 @@ namespace TicTacToe
             }
             else
             {
-                MessageBox.Show("Vui lòng nhập tên người chơi!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please enter your player name!", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -107,7 +107,7 @@ namespace TicTacToe
             }
             else
             {
-                MessageBox.Show("Vui lòng nhập tên người chơi!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please enter your player name!", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -115,13 +115,13 @@ namespace TicTacToe
         {
             if (string.IsNullOrWhiteSpace(txt_PlayerName.Text))
             {
-                MessageBox.Show("Vui lòng nhập tên người chơi!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please enter your player name!", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
 
             if (string.IsNullOrWhiteSpace(txt_IP.Text))
             {
-                MessageBox.Show("Vui lòng nhập địa chỉ IP!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please enter the IP address!", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
 
@@ -129,11 +129,16 @@ namespace TicTacToe
             int boardSize = (int)numBoardSize.Value;
             if (boardSize < 3 || boardSize > 20)
             {
-                MessageBox.Show("Kích thước bàn cờ phải từ 3 đến 20!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return false;
+				MessageBox.Show("The board size must be between 3 and 20!", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				return false;
             }
 
             return true;
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
