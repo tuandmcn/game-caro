@@ -37,10 +37,10 @@ namespace Game_Caro
             server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
             server.Bind(iep);
-            server.Listen(10); // Đợi kết nối client trong 10s nếu ko có thì bỏ
+            server.Listen(10); // Đợi kết nối client trong 10s nếu ko có thì bỏ
 
             Thread AcceptClient = new Thread(() => { try { client = server.Accept(); } catch { } });
-            AcceptClient.IsBackground = true; // Để khi chương trình tắt ngang thì Thread cũng tự tắt
+            AcceptClient.IsBackground = true; // Để khi chương trình tắt ngang thì Thread cũng tự tắt
             AcceptClient.Start();
         }
         #endregion
@@ -53,27 +53,49 @@ namespace Game_Caro
 
         private bool SendData(Socket target, byte[] data)
         {
-            if (target != null)
+            if (target != null && target.Connected)
                 return target.Send(data) == 1;
             return false;
         }
 
         private bool ReceiveData(Socket target, byte[] data)
         {
-            return target.Receive(data) == 1;
+            if (target != null && target.Connected)
+                return target.Receive(data) == 1;
+            return false;
         }
 
         public bool Send(object data)
         {
-            byte[] sendedData = SerializeData(data);
-            return SendData(client, sendedData);
+            try
+            {
+                byte[] sendedData = SerializeData(data);
+                return SendData(client, sendedData);
+            }
+            catch
+            {
+                // Silently handle serialization or connection errors
+                return false;
+            }
         }
 
         public object Receive()
         {
-            byte[] receivedData = new byte[BUFFER]; // 1 lần nhận tin là cỡ bao nhiêu
-            bool IsOk = ReceiveData(client, receivedData);
-            return DeserializeData(receivedData);
+            if (client == null || !client.Connected)
+                return null;
+                
+            try
+            {
+                byte[] receivedData = new byte[BUFFER];
+                bool IsOk = ReceiveData(client, receivedData);
+                if (!IsOk)
+                    return null;
+                return DeserializeData(receivedData);
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         /// <summary>

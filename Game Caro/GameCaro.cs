@@ -103,7 +103,12 @@ namespace Game_Caro
             btn_Send.Enabled = isChatAvailable;
             txt_Chat.Enabled = isChatAvailable;
             
-            if (!isChatAvailable)
+            if (isChatAvailable)
+            {
+                // When switching to LAN mode, clear the chat box
+                txt_Chat.Clear();
+            }
+            else
             {
                 txt_Chat.Text = "Tính năng chat không khả dụng trong chế độ này.";
             }
@@ -112,6 +117,9 @@ namespace Game_Caro
         private void SetupLanGame(bool isHost)
         {
             board.PlayMode = 1;
+            
+            // Clear any previous chat messages when starting a new LAN game session
+            txt_Chat.Clear();
             
             if (isHost)
             {
@@ -433,6 +441,10 @@ namespace Game_Caro
         {
             // Method kept for compatibility with menu item
             board.PlayMode = 1;
+            
+            // Kích hoạt chế độ chat khi chuyển sang chế độ LAN
+            SetChatAvailability(1);
+            
             NewGame();
 
             socket.IP = txt_IP.Text;
@@ -468,6 +480,10 @@ namespace Game_Caro
             }
 
             board.PlayMode = 2;
+            
+            // Vô hiệu hóa chế độ chat khi chuyển sang chế độ chơi 2 người trên cùng máy
+            SetChatAvailability(2);
+            
             NewGame();
         }
 
@@ -488,6 +504,10 @@ namespace Game_Caro
             bool previousAIGoesFirst = board.PlayMode == 3 ? board.AIGoesFirst : true;
             
             board.PlayMode = 3;
+            
+            // Vô hiệu hóa chế độ chat khi chuyển sang chế độ chơi với máy
+            SetChatAvailability(3);
+            
             NewGame();
             
             // Đặt lại trạng thái AI đi trước đã lưu
@@ -505,8 +525,8 @@ namespace Game_Caro
             // 3. Đã bắt đầu ván mới nhưng chưa đánh ô nào (board.StkUndoStep.Count == 0)
             if (pn_GameBoard.Enabled == false || board.StkUndoStep == null || board.StkUndoStep.Count == 0)
             {
-                // Tạo form Settings với kích thước bàn cờ hiện tại
-                SettingsForm settingsForm = new SettingsForm(BoardSize);
+                // Tạo form Settings với kích thước bàn cờ và chế độ chơi hiện tại
+                SettingsForm settingsForm = new SettingsForm(BoardSize, board.PlayMode);
                 
                 // Đăng ký xử lý sự kiện khi kích thước bàn cờ thay đổi
                 settingsForm.BoardSizeChanged += (s, args) => 
@@ -517,6 +537,52 @@ namespace Game_Caro
                     if (board.StkUndoStep != null && board.StkUndoStep.Count == 0)
                     {
                         NewGame(); // Áp dụng kích thước bàn cờ mới ngay lập tức
+                    }
+                };
+                
+                // Đăng ký xử lý sự kiện khi chế độ chơi thay đổi
+                settingsForm.PlayModeChanged += (s, args) => 
+                {
+                    int newPlayMode = args.NewPlayMode;
+                    
+                    // Xử lý chuyển chế độ chơi
+                    if (newPlayMode != board.PlayMode)
+                    {
+                        // Nếu đang trong chế độ LAN, gửi thông báo ngắt kết nối và đóng kết nối
+                        if (board.PlayMode == 1)
+                        {
+                            try
+                            {
+                                socket.Send(new SocketData((int)SocketCommand.QUIT, "", new Point()));
+                                socket.CloseConnect();
+                            } 
+                            catch { }
+                        }
+                        
+                        // Đặt chế độ chơi mới
+                        board.PlayMode = newPlayMode;
+                        
+                        // Cập nhật trạng thái chat dựa trên chế độ chơi mới
+                        SetChatAvailability(newPlayMode);
+                        
+                        // Nếu đang ở ván mới chưa đánh ô nào, áp dụng thay đổi ngay lập tức
+                        if (board.StkUndoStep != null && board.StkUndoStep.Count == 0)
+                        {
+                            switch (newPlayMode)
+                            {
+                                case 1: // LAN Mode
+                                    // Clear the chat box when switching to LAN mode
+                                    txt_Chat.Clear();
+                                    SetupLanGame(true); // Mặc định là host khi chuyển qua LAN từ settings
+                                    break;
+                                case 2: // Same PC Mode
+                                    SetupSamePcGame();
+                                    break;
+                                case 3: // AI Mode
+                                    SetupAiGame();
+                                    break;
+                            }
+                        }
                     }
                 };
                 
@@ -583,14 +649,29 @@ namespace Game_Caro
             if (string.IsNullOrWhiteSpace(txt_Message.Text))
                 return;
 
-            txt_Chat.Text += "- " + PlayerName + ": " + txt_Message.Text + "\r\n";
-
-            socket.Send(new SocketData((int)SocketCommand.SEND_MESSAGE, txt_Chat.Text, new Point()));
+            // Add message to local chat
+            string messageToAdd = "- " + PlayerName + ": " + txt_Message.Text + "\r\n";
+            txt_Chat.Text += messageToAdd;
             
-            // Clear the message text box after sending
+            // Cuộn xuống để hiển thị tin nhắn mới nhất
+            txt_Chat.SelectionStart = txt_Chat.Text.Length;
+            txt_Chat.ScrollToCaret();
+            
+            // Store the message and clear text box regardless of connection status
+            string currentMessage = txt_Message.Text;
             txt_Message.Text = "";
-            
-            Listen();
+
+            // Try to send the message if the other player is connected
+            try
+            {
+                socket.Send(new SocketData((int)SocketCommand.SEND_MESSAGE, txt_Chat.Text, new Point()));
+                Listen();
+            }
+            catch (Exception)
+            {
+                // Silently fail - we already showed the message locally
+                // This allows chatting "to yourself" until the opponent connects
+            }
         }
         #endregion
 
@@ -607,7 +688,10 @@ namespace Game_Caro
                 try
                 {
                     SocketData data = (SocketData)socket.Receive();
-                    ProcessData(data);
+                    if (data != null)
+                    {
+                        ProcessData(data);
+                    }
                 }
                 catch { }
             });
@@ -618,88 +702,115 @@ namespace Game_Caro
 
         private void ProcessData(SocketData data)
         {
-            switch (data.Command)
+            try
             {
-                case (int)SocketCommand.SEND_POINT:
-                    // Có thay đổi giao diện muốn chạy ngọt phải để trong đây
-                    this.Invoke((MethodInvoker)(() =>
-                    {
-                        board.OtherPlayerClicked(data.Point);
-                        pn_GameBoard.Enabled = true;
+                switch (data.Command)
+                {
+                    case (int)SocketCommand.SEND_POINT:
+                        // Có thay đổi giao diện muốn chạy ngọt phải để trong đây
+                        this.Invoke((MethodInvoker)(() =>
+                        {
+                            board.OtherPlayerClicked(data.Point);
+                            pn_GameBoard.Enabled = true;
 
-                        pgb_CountDown.Value = 0;
-                        tm_CountDown.Start();
+                            pgb_CountDown.Value = 0;
+                            tm_CountDown.Start();
 
-                        undoToolStripMenuItem.Enabled = true;
-                        redoToolStripMenuItem.Enabled = true;
+                            undoToolStripMenuItem.Enabled = true;
+                            redoToolStripMenuItem.Enabled = true;
 
-                        btn_Undo.Enabled = true;
-                        btn_Redo.Enabled = true;
-                    }));
-                    break;
+                            btn_Undo.Enabled = true;
+                            btn_Redo.Enabled = true;
+                        }));
+                        break;
 
-                case (int)SocketCommand.SEND_MESSAGE:
-                    txt_Chat.Text = data.Message;
-                    break;
+                    case (int)SocketCommand.SEND_MESSAGE:
+                        // Instead of replacing chat text, extract the new message and append it
+                        string incomingText = data.Message;
+                        
+                        // Get only the last line which is the new message
+                        string[] allLines = incomingText.Split(new[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries);
+                        if (allLines.Length > 0)
+                        {
+                            string lastLine = allLines[allLines.Length - 1];
+                            
+                            // Check if this message is already in our chat (to avoid duplicates)
+                            if (!txt_Chat.Text.Contains(lastLine))
+                            {
+                                txt_Chat.Text += lastLine + "\r\n";
+                            }
+                        }
+                        
+                        // Cuộn xuống để hiển thị tin nhắn mới nhất
+                        txt_Chat.SelectionStart = txt_Chat.Text.Length;
+                        txt_Chat.ScrollToCaret();
+                        break;
 
-                case (int)SocketCommand.NEW_GAME:
-                    this.Invoke((MethodInvoker)(() =>
-                    {
-                        NewGame();
-                        pn_GameBoard.Enabled = false;
-                    }));
-                    break;
+                    case (int)SocketCommand.NEW_GAME:
+                        this.Invoke((MethodInvoker)(() =>
+                        {
+                            NewGame();
+                            pn_GameBoard.Enabled = false;
+                        }));
+                        break;
 
-                case (int)SocketCommand.UNDO:
-                    this.Invoke((MethodInvoker)(() =>
-                    {
-                        pgb_CountDown.Value = 0;
-                        board.Undo();
-                    }));
-                    break;
+                    case (int)SocketCommand.UNDO:
+                        this.Invoke((MethodInvoker)(() =>
+                        {
+                            pgb_CountDown.Value = 0;
+                            board.Undo();
+                        }));
+                        break;
 
-                case (int)SocketCommand.REDO:
-                    this.Invoke((MethodInvoker)(() =>
-                    {
-                        // pgb_CountDown.Value = 0;
-                        board.Redo();
-                    }));
-                    break;
+                    case (int)SocketCommand.REDO:
+                        this.Invoke((MethodInvoker)(() =>
+                        {
+                            // pgb_CountDown.Value = 0;
+                            board.Redo();
+                        }));
+                        break;
 
-                case (int)SocketCommand.END_GAME:
-                    this.Invoke((MethodInvoker)(() =>
-                    {
-                        EndGame();
-                        MessageBox.Show(PlayerName + " is the winner ♥ !!!", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }));
-                    break;
+                    case (int)SocketCommand.END_GAME:
+                        this.Invoke((MethodInvoker)(() =>
+                        {
+                            EndGame();
+                            MessageBox.Show(PlayerName + " is the winner ♥ !!!", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }));
+                        break;
 
-                case (int)SocketCommand.TIME_OUT:
-                    this.Invoke((MethodInvoker)(() =>
-                    {
-                        EndGame();
-                        MessageBox.Show("Time has expired !!!", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }));
-                    break;
+                    case (int)SocketCommand.TIME_OUT:
+                        this.Invoke((MethodInvoker)(() =>
+                        {
+                            EndGame();
+                            MessageBox.Show("Time has expired !!!", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }));
+                        break;
 
-                case (int)SocketCommand.QUIT:
-                    this.Invoke((MethodInvoker)(() =>
-                    {
-                        tm_CountDown.Stop();
-                        EndGame();
-                    
-                        board.PlayMode = 2;
-                        socket.CloseConnect();
+                    case (int)SocketCommand.QUIT:
+                        this.Invoke((MethodInvoker)(() =>
+                        {
+                            tm_CountDown.Stop();
+                            EndGame();
+                        
+                            board.PlayMode = 2;
+                            socket.CloseConnect();
 
-                        MessageBox.Show("The opponent has disconnected.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }));
-                    break;
+                            MessageBox.Show("The opponent has disconnected.", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }));
+                        break;
 
-                default:
-                    break;
+                    default:
+                        break;
+                }
+
+                // Continue listening for new messages
+                Listen();
             }
-
-            Listen();
+            catch
+            {
+                // If there's an exception processing the data, still try to continue listening
+                Listen();
+            }
         }
         #endregion
 
