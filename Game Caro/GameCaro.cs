@@ -155,9 +155,46 @@ namespace TicTacToe
                 {
                     // Set the property on the board
                     board.AIGoesFirst = aiFirstMoveForm.AIGoesFirst;
-                    
-                    // Nếu AI đi trước, thì cho AI đi ngay lập tức
-                    if (board.AIGoesFirst)
+					var humanAvatar = Image.FromFile(Application.StartupPath + @"\images\Quan.jpg"); // hoặc ảnh người sẵn có
+					var aiAvatar = Image.FromFile(Application.StartupPath + @"\images\Lisa.jpg"); // hoặc ảnh máy sẵn có
+
+					if (board.AIGoesFirst)
+					{
+						// AI là player 0, Human là player 1
+						board.ListPlayers[0].Name = "Computer";
+						board.ListPlayers[0].Avatar = aiAvatar;
+
+						board.ListPlayers[1].Name = "You";
+						board.ListPlayers[1].Avatar = humanAvatar;
+
+						board.CurrentPlayer = 0; // lượt hiện tại là AI
+					}
+					else
+					{
+						// Human là player 0, AI là player 1
+						board.ListPlayers[0].Name = "You";
+						board.ListPlayers[0].Avatar = humanAvatar;
+
+						board.ListPlayers[1].Name = "Computer";
+						board.ListPlayers[1].Avatar = aiAvatar;
+
+						board.CurrentPlayer = 0; // lượt hiện tại là You
+					}
+
+					// ✅ gọi lại logic 2-player để cập nhật ảnh/tên ở UI
+					board.RefreshCurrentPlayerUI();
+
+					// Nếu AI đi trước thì để UI render xong rồi mới cho AI đi
+					if (board.AIGoesFirst)
+					{
+						this.Refresh();
+						Application.DoEvents();
+						board.StartAI();
+					}
+
+
+					// Nếu AI đi trước, thì cho AI đi ngay lập tức
+					if (board.AIGoesFirst)
                     {
                         // Đảm bảo mọi thứ được render xong
                         this.Refresh();
@@ -333,17 +370,17 @@ namespace TicTacToe
 				string msg;
 				if (board.PlayMode == 3) // Chơi với máy (AI)
 				{
-					// Trong code hiện tại AI là người chơi 0, bạn là 1
-					msg = (winnerIdx == 0) ? "Máy thắng!" : "Bạn thắng!";
+					int aiIndex = board.AIGoesFirst ? 0 : 1;
+					msg = (winnerIdx == aiIndex) ? "Computer wins!" : "You win!";
 				}
 				else
 				{
 					// 2 người trên cùng máy hoặc qua LAN: hiển thị tên người thắng
 					string winnerName = board.ListPlayers[winnerIdx].Name;
-					msg = $"\"{winnerName}\" thắng!";
+					msg = $"\"{winnerName}\" wins!";
 				}
 
-				MessageBox.Show(msg, "Kết quả", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				MessageBox.Show(msg, "Result", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			}
 
 			EndGame();  // dừng đồng hồ, khóa bàn cờ
@@ -400,11 +437,11 @@ namespace TicTacToe
                 // Cho máy đi nước đầu tiên
                 board.StartAI();
             }
-            
-            // Thông báo cho người dùng biết có thể thay đổi cài đặt
-            MessageBox.Show("Ván mới đã được tạo. Bạn có thể thay đổi kích thước bàn cờ trong menu Options > Settings trước khi bắt đầu đánh.", 
-                "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
+
+			// Thông báo cho người dùng biết có thể thay đổi cài đặt
+			MessageBox.Show("A new game has been created. You can change the board size in Options > Settings before starting a match.",
+				"Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
+		}
 
         private void UndoToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -525,10 +562,10 @@ namespace TicTacToe
             }
             else
             {
-                MessageBox.Show("Bạn cần kết thúc ván chơi hiện tại hoặc bắt đầu ván mới trước khi thay đổi cài đặt!", 
-                    "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
+				MessageBox.Show("You need to finish the current game or start a new one before changing the settings!",
+				"Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			}
+		}
 
         private void HowToPlayToolStripMenuItem_Click(object sender, EventArgs e)
         {

@@ -57,7 +57,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(106, 17);
             this.label1.TabIndex = 0;
-            this.label1.Text = "Tên người chơi:";
+            this.label1.Text = "Player name:";
             // 
             // label2
             // 
@@ -68,7 +68,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(71, 17);
             this.label2.TabIndex = 1;
-            this.label2.Text = "Địa chỉ IP:";
+            this.label2.Text = "IP Address:";
             // 
             // txt_PlayerName
             // 
@@ -97,7 +97,7 @@
             this.btn_HostGame.Name = "btn_HostGame";
             this.btn_HostGame.Size = new System.Drawing.Size(100, 37);
             this.btn_HostGame.TabIndex = 4;
-            this.btn_HostGame.Text = "Tạo Game";
+            this.btn_HostGame.Text = "Create Game";
             this.btn_HostGame.UseVisualStyleBackColor = false;
             this.btn_HostGame.Click += new System.EventHandler(this.btn_HostGame_Click);
             // 
@@ -110,7 +110,7 @@
             this.btn_JoinGame.Name = "btn_JoinGame";
             this.btn_JoinGame.Size = new System.Drawing.Size(108, 37);
             this.btn_JoinGame.TabIndex = 5;
-            this.btn_JoinGame.Text = "Vào Game";
+            this.btn_JoinGame.Text = "Join Game";
             this.btn_JoinGame.UseVisualStyleBackColor = false;
             this.btn_JoinGame.Click += new System.EventHandler(this.btn_JoinGame_Click);
             // 
@@ -124,6 +124,7 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(332, 95);
             this.panel1.TabIndex = 6;
+			this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
             // label3
             // 
@@ -145,7 +146,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(107, 17);
             this.label4.TabIndex = 7;
-            this.label4.Text = "Chơi qua LAN";
+            this.label4.Text = "Play via LAN";
             // 
             // label5
             // 
@@ -156,7 +157,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(88, 17);
             this.label5.TabIndex = 8;
-            this.label5.Text = "Chơi ở máy";
+            this.label5.Text = "Play on this computer";
             // 
             // btn_SamePC
             // 
@@ -167,7 +168,7 @@
             this.btn_SamePC.Name = "btn_SamePC";
             this.btn_SamePC.Size = new System.Drawing.Size(129, 37);
             this.btn_SamePC.TabIndex = 9;
-            this.btn_SamePC.Text = "2 Người Chơi";
+            this.btn_SamePC.Text = "Two Players";
             this.btn_SamePC.UseVisualStyleBackColor = false;
             this.btn_SamePC.Click += new System.EventHandler(this.btn_SamePC_Click);
             // 
@@ -180,7 +181,7 @@
             this.btn_PlayAI.Name = "btn_PlayAI";
             this.btn_PlayAI.Size = new System.Drawing.Size(129, 37);
             this.btn_PlayAI.TabIndex = 10;
-            this.btn_PlayAI.Text = "Chơi với Máy";
+            this.btn_PlayAI.Text = "Play with computer";
             this.btn_PlayAI.UseVisualStyleBackColor = false;
             this.btn_PlayAI.Click += new System.EventHandler(this.btn_PlayAI_Click);
             // 
@@ -193,7 +194,7 @@
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(60, 17);
             this.label6.TabIndex = 11;
-            this.label6.Text = "Số ô cờ:";
+            this.label6.Text = "Board size:";
             // 
             // numBoardSize
             // 
@@ -229,7 +230,7 @@
             this.lblBoardSizeInfo.Name = "lblBoardSizeInfo";
             this.lblBoardSizeInfo.Size = new System.Drawing.Size(153, 15);
             this.lblBoardSizeInfo.TabIndex = 13;
-            this.lblBoardSizeInfo.Text = "(thắng 5 liên tiếp để thắng)";
+            this.lblBoardSizeInfo.Text = "(Win 5 in a row to win)";
             // 
             // LoginForm
             // 

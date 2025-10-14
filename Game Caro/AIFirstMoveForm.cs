@@ -17,7 +17,7 @@ namespace TicTacToe
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.ShowInTaskbar = false;
-            this.Text = "Ai ?i tr??c?";
+            this.Text = "Who goes first?";
             this.BackColor = Color.Lavender;
             this.AcceptButton = btnPlayerFirst;  // Set default button
             this.Font = new Font("Microsoft Sans Serif", 9F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
@@ -39,7 +39,7 @@ namespace TicTacToe
             this.btnPlayerFirst.Name = "btnPlayerFirst";
             this.btnPlayerFirst.Size = new System.Drawing.Size(120, 45);
             this.btnPlayerFirst.TabIndex = 0;
-            this.btnPlayerFirst.Text = "B?n ?i tr??c";
+            this.btnPlayerFirst.Text = "You go first";
             this.btnPlayerFirst.UseVisualStyleBackColor = false;
             this.btnPlayerFirst.Click += new System.EventHandler(this.btnPlayerFirst_Click);
             // 
@@ -51,7 +51,7 @@ namespace TicTacToe
             this.btnAIFirst.Name = "btnAIFirst";
             this.btnAIFirst.Size = new System.Drawing.Size(120, 45);
             this.btnAIFirst.TabIndex = 1;
-            this.btnAIFirst.Text = "Máy ?i tr??c";
+            this.btnAIFirst.Text = "Computer goes first";
             this.btnAIFirst.UseVisualStyleBackColor = false;
             this.btnAIFirst.Click += new System.EventHandler(this.btnAIFirst_Click);
             // 
@@ -63,8 +63,9 @@ namespace TicTacToe
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(150, 17);
             this.label1.TabIndex = 2;
-            this.label1.Text = "Ch?n ng??i ?i tr??c";
+            this.label1.Text = "Choose who goes first";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // AIFirstMoveForm
             // 
@@ -74,6 +75,8 @@ namespace TicTacToe
             this.Controls.Add(this.btnPlayerFirst);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AIFirstMoveForm";
+			//dat them
+			this.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -95,6 +98,11 @@ namespace TicTacToe
             AIGoesFirst = true;
             this.DialogResult = DialogResult.OK;
             this.Close();
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
