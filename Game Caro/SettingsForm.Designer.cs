@@ -49,8 +49,9 @@ namespace TicTacToe
             this.groupBox1.Size = new System.Drawing.Size(398, 100);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "C?u hình bàn c?";
-            // 
+            this.groupBox1.Text = "Board Configuration";
+            this.groupBox1.Enter += new System.EventHandler(this.groupBox1_Enter);
+			// 
             // lblBoardSizeInfo
             // 
             this.lblBoardSizeInfo.AutoSize = true;
@@ -59,7 +60,7 @@ namespace TicTacToe
             this.lblBoardSizeInfo.Name = "lblBoardSizeInfo";
             this.lblBoardSizeInfo.Size = new System.Drawing.Size(179, 18);
             this.lblBoardSizeInfo.TabIndex = 2;
-            this.lblBoardSizeInfo.Text = "(th?ng 5 ô liên ti?p ?? th?ng)";
+            this.lblBoardSizeInfo.Text = "(win 5 in a row to win)";
             // 
             // numBoardSize
             // 
@@ -100,7 +101,7 @@ namespace TicTacToe
             this.btnApply.Name = "btnApply";
             this.btnApply.Size = new System.Drawing.Size(106, 36);
             this.btnApply.TabIndex = 1;
-            this.btnApply.Text = "Áp d?ng";
+            this.btnApply.Text = "Apply";
             this.btnApply.UseVisualStyleBackColor = true;
             this.btnApply.Click += new System.EventHandler(this.btnApply_Click);
             // 
@@ -111,7 +112,7 @@ namespace TicTacToe
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(106, 36);
             this.btnCancel.TabIndex = 2;
-            this.btnCancel.Text = "H?y";
+            this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
@@ -128,7 +129,7 @@ namespace TicTacToe
             this.MinimizeBox = false;
             this.Name = "SettingsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Cài ??t";
+            this.Text = "Settings";
             this.Load += new System.EventHandler(this.SettingsForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

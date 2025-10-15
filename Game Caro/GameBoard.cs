@@ -8,7 +8,7 @@ namespace TicTacToe
     class GameBoard
     {
         #region Properties
-        private Panel board;
+        private Panel board; 
 
         private int currentPlayer;
         private TextBox playerName;
@@ -36,12 +36,12 @@ namespace TicTacToe
         private int boardSize = 10;  // Default size 10x10
         private int cellsToWin = 5;  // Default 5 in a row to win
 
-        // Gi?i h?n t?ng s? l?n UNDO + REDO cho m?i ng??i ch?i trong m?t ván
-        private const int OP_LIMIT = 5;
-        // opCount[0] cho Player 0 (AI n?u PlayMode=3), opCount[1] cho Player 1 (ng??i)
-        private int[] opCount = new int[2];
+		// Gi?i h?n t?ng s? l?n UNDO + REDO cho m?i ng??i ch?i trong m?t ván
+		private const int OP_LIMIT = 5;
+		// opCount[0] cho Player 0 (AI n?u PlayMode=3), opCount[1] cho Player 1 (ng??i)
+		private int[] opCount = new int[2];
 
-        public Panel Board
+		public Panel Board
         {
             get { return board; }
             set { board = value; }
@@ -134,12 +134,12 @@ namespace TicTacToe
         #region Initialize
         public GameBoard(Panel board, TextBox PlayerName, PictureBox Avatar)
         {
-            Board = board;
+            this.Board = board;
             this.PlayerName = PlayerName;
             this.Avatar = Avatar;
 
-            CurrentPlayer = 0;
-            ListPlayers = new List<Player>()
+            this.CurrentPlayer = 0;
+            this.ListPlayers = new List<Player>()
             {
                 new Player("Player 1", Image.FromFile(Application.StartupPath + "\\images\\Quan.jpg"),
                                         Image.FromFile(Application.StartupPath + "\\images\\X.png")),
@@ -163,8 +163,8 @@ namespace TicTacToe
             {
                 BoardSize = size;
                 // Set win condition based on board size
-                CellsToWin = size <= 5 ? 3 : 5;
-
+                CellsToWin = (size <= 5) ? 3 : 5;
+                
                 // Update Constance values to match the new board size
                 Constance.nRows = size;
                 Constance.nCols = size;
@@ -190,7 +190,7 @@ namespace TicTacToe
             opCount[0] = 0;
             opCount[1] = 0;
 
-            CurrentPlayer = 0;
+			this.CurrentPlayer = 0;
             ChangePlayer();
 
             int LocX = 0;
@@ -248,17 +248,18 @@ namespace TicTacToe
             if (StkUndoStep.Count <= 1)
                 return false;
 
-            // Gi?i h?n t?ng s? l?n UNDO+REDO theo ch? ?? ch?i
-            int actor = CurrentPlayer;               // ng??i ?ang t?i l??t b?m Undo
-            if (PlayMode == 3) actor = 1;            // Ch?i v?i máy: ch? ng??i th?t b? gi?i h?n
+			// Gi?i h?n t?ng s? l?n UNDO+REDO theo ch? ?? ch?i
+			int actor = this.CurrentPlayer;               // ng??i ?ang t?i l??t b?m Undo
+			if (this.PlayMode == 3) actor = 1;            // Ch?i v?i máy: ch? ng??i th?t b? gi?i h?n
 
-            if (opCount[actor] >= OP_LIMIT)
-            {
-                MessageBox.Show($"B?n ?ã dùng h?t {OP_LIMIT} l?n UNDO/REDO.",
-                                "Gi?i h?n", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return false;
-            }
-            opCount[actor]++; // ghi nh?n m?t l?n thao tác Undo/Redo
+			if (opCount[actor] >= OP_LIMIT)
+			{
+				MessageBox.Show($"You have used all {OP_LIMIT} UNDO/REDO operations.",
+				"Limit reached", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+				return false;
+			}
+			opCount[actor]++; // ghi nh?n m?t l?n thao tác Undo/Redo
 
 
             PlayInfo OldPos = StkUndoStep.Peek();
@@ -293,20 +294,29 @@ namespace TicTacToe
 
         public bool Redo()
         {
-            if (StkRedoStep.Count <= 0)
-                return false;
+			//if (StkRedoStep.Count <= 0)
+			//    return false;
+			if (StkRedoStep.Count <= 0)
+			{
+				MessageBox.Show("You must Undo before you can Redo.",
+								"Notification",
+								MessageBoxButtons.OK,
+								MessageBoxIcon.Information);
+				return false;
+			}
 
-            // Gi?i h?n t?ng s? l?n UNDO+REDO theo ch? ?? ch?i
-            int actor = CurrentPlayer;               // ng??i ?ang t?i l??t b?m Redo
-            if (PlayMode == 3) actor = 1;            // Ch?i v?i máy: ch? ng??i th?t b? gi?i h?n
+			// Gi?i h?n t?ng s? l?n UNDO+REDO theo ch? ?? ch?i
+			int actor = this.CurrentPlayer;               // ng??i ?ang t?i l??t b?m Redo
+			if (this.PlayMode == 3) actor = 1;            // Ch?i v?i máy: ch? ng??i th?t b? gi?i h?n
 
-            if (opCount[actor] >= OP_LIMIT)
-            {
-                MessageBox.Show($"B?n ?ã dùng h?t {OP_LIMIT} l?n UNDO/REDO.",
-                                "Gi?i h?n", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return false;
-            }
-            opCount[actor]++; // ghi nh?n m?t l?n thao tác Undo/Redo
+			if (opCount[actor] >= OP_LIMIT)
+			{
+				MessageBox.Show($"You have used all {OP_LIMIT} UNDO/REDO operations.",
+				"Limit reached", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+				return false;
+			}
+			opCount[actor]++; // ghi nh?n m?t l?n thao tác Undo/Redo
 
 
             PlayInfo OldPos = StkRedoStep.Peek();
@@ -498,7 +508,13 @@ namespace TicTacToe
             Avatar.Image = ListPlayers[CurrentPlayer].Avatar;
         }
 
-        private void btn_Click(object sender, EventArgs e)
+		// Tái dùng logic c?a ch? ?? 2 ng??i
+		public void RefreshCurrentPlayerUI()
+		{
+			PlayerName.Text = ListPlayers[CurrentPlayer].Name;
+			Avatar.Image = ListPlayers[CurrentPlayer].Avatar;
+		}
+		private void btn_Click(object sender, EventArgs e)
         {
             Button btn = sender as Button;
 
@@ -522,7 +538,7 @@ namespace TicTacToe
                 return;  // Don't continue with AI move if game is over
             }
 
-            if (!IsAI && playMode == 3)
+            if (!(IsAI) && playMode == 3)
                 StartAI();
 
             IsAI = false;
@@ -946,8 +962,8 @@ namespace TicTacToe
 
                 Point movePosition;
                 Random rand = new Random();
-
-                if (StkUndoStep.Count == 0)
+                
+                if (StkUndoStep.Count == 0) 
                 {
                     // T?o n??c ?i ??u tiên ng?u nhiên thay vì luôn ? g?n gi?a bàn c?
 
@@ -959,9 +975,9 @@ namespace TicTacToe
                     int region = rand.Next(9); // 0-8 (3x3 regions)
 
                     // Xác ??nh v? trí d?a trên khu v?c ???c ch?n
-                    int baseRow = region / 3 * regionHeight;
-                    int baseCol = region % 3 * regionWidth;
-
+                    int baseRow = (region / 3) * regionHeight;
+                    int baseCol = (region % 3) * regionWidth;
+                    
                     // Thêm m?t chút ng?u nhiên th?c s? trong khu v?c
                     int row = Math.Min(Constance.nRows - 1, baseRow + rand.Next(regionHeight));
                     int col = Math.Min(Constance.nCols - 1, baseCol + rand.Next(regionWidth));
@@ -987,7 +1003,7 @@ namespace TicTacToe
                 }
 
                 // ??m b?o v? trí h?p l? và ô ch?a ???c ?ánh
-                if (movePosition.X >= 0 && movePosition.X < Constance.nCols &&
+                if (movePosition.X >= 0 && movePosition.X < Constance.nCols && 
                     movePosition.Y >= 0 && movePosition.Y < Constance.nRows &&
                     MatrixPositions[movePosition.Y][movePosition.X].BackgroundImage == null)
                 {
@@ -1049,7 +1065,7 @@ namespace TicTacToe
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Không th? th?c hi?n n??c ?i c?a máy: " + ex.Message,
+                MessageBox.Show("Could not perform computer's move: " + ex.Message,
                     "L?i", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
