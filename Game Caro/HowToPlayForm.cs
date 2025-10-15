@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Game_Caro
+namespace TicTacToe
 {
     public partial class HowToPlayForm : Form
     {

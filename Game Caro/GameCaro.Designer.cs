@@ -1,4 +1,4 @@
-﻿namespace Game_Caro
+﻿namespace TicTacToe
 {
     partial class GameCaro
     {
@@ -111,7 +111,7 @@
             // 
             this.pb_Logo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pb_Logo.BackColor = System.Drawing.Color.White;
-            this.pb_Logo.BackgroundImage = global::Game_Caro.Properties.Resources.logo_kmin;
+            this.pb_Logo.BackgroundImage = global::TicTacToe.Properties.Resources.logo_kmin;
             this.pb_Logo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pb_Logo.InitialImage = null;
             this.pb_Logo.Location = new System.Drawing.Point(0, 0);
@@ -188,7 +188,7 @@
             // pb_Avatar
             // 
             this.pb_Avatar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pb_Avatar.BackgroundImage = global::Game_Caro.Properties.Resources.Quan;
+            this.pb_Avatar.BackgroundImage = global::TicTacToe.Properties.Resources.Quan;
             this.pb_Avatar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pb_Avatar.Location = new System.Drawing.Point(0, 0);
             this.pb_Avatar.Margin = new System.Windows.Forms.Padding(2);
@@ -305,7 +305,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.pictureBox1.BackgroundImage = global::Game_Caro.Properties.Resources.banner;
+            this.pictureBox1.BackgroundImage = global::TicTacToe.Properties.Resources.banner;
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox1.Location = new System.Drawing.Point(0, 31);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
@@ -563,7 +563,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.PowderBlue;
-            this.BackgroundImage = global::Game_Caro.Properties.Resources.background_main;
+            this.BackgroundImage = global::TicTacToe.Properties.Resources.background_main;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(970, 646);
             this.Controls.Add(this.txt_Chat);
@@ -576,9 +576,9 @@
             this.Controls.Add(this.menuStrip);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
-            this.Name = "GameCaro";
+            this.Name = "TicTacToe";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Game Caro ";
+            this.Text = "Tic Tac Toe ";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GameCaro_FormClosing);
             this.Load += new System.EventHandler(this.GameCaro_Load);
             this.Shown += new System.EventHandler(this.GameCaro_Shown);

@@ -1,6 +1,6 @@
 ﻿using System.Drawing;
 
-namespace Game_Caro
+namespace TicTacToe
 {
     class PlayInfo
     {
@@ -19,9 +19,9 @@ namespace Game_Caro
 
         public PlayInfo(Point point, int currentPlayer, Image symbol)
         {
-            this.Point = point;
-            this.CurrentPlayer = currentPlayer;
-            this.Symbol = symbol;
+            Point = point;
+            CurrentPlayer = currentPlayer;
+            Symbol = symbol;
         }
     }
 }

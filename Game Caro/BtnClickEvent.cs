@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Drawing;
 
-namespace Game_Caro
+namespace TicTacToe
 {
     class BtnClickEvent : EventArgs
     {

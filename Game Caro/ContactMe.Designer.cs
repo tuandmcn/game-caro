@@ -1,5 +1,5 @@
 ﻿
-namespace Game_Caro
+namespace TicTacToe
 {
     partial class ContactMe
     {
@@ -48,7 +48,7 @@ namespace Game_Caro
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::Game_Caro.Properties.Resources.background;
+            this.BackgroundImage = global::TicTacToe.Properties.Resources.background;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(520, 328);

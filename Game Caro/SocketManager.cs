@@ -6,7 +6,7 @@ using System.Net.Sockets;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading;
 
-namespace Game_Caro
+namespace TicTacToe
 {
     class SocketManager
     {

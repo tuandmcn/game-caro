@@ -2,7 +2,7 @@ using System;
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace Game_Caro
+namespace TicTacToe
 {
     public partial class AIFirstMoveForm : Form
     {
@@ -25,6 +25,7 @@ namespace Game_Caro
 
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AIFirstMoveForm));
             this.btnPlayerFirst = new System.Windows.Forms.Button();
             this.btnAIFirst = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -60,7 +61,7 @@ namespace Game_Caro
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(100, 25);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(155, 20);
+            this.label1.Size = new System.Drawing.Size(150, 17);
             this.label1.TabIndex = 2;
             this.label1.Text = "Ch?n ng??i ?i tr??c";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -71,9 +72,11 @@ namespace Game_Caro
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnAIFirst);
             this.Controls.Add(this.btnPlayerFirst);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "AIFirstMoveForm";
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         private System.Windows.Forms.Button btnPlayerFirst;
