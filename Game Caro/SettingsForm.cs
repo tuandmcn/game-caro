@@ -67,6 +67,11 @@ namespace TicTacToe
         {
 
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
     // L?p EventArgs tùy ch?nh ?? truy?n kích th??c bàn c? m?i
