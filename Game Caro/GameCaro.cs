@@ -126,21 +126,21 @@ namespace TicTacToe
                 socket.IsServer = true;
                 pn_GameBoard.Enabled = true;
                 socket.CreateServer();
-                MessageBox.Show("Bạn đang là Server", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
+				MessageBox.Show("You are the server", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+			}
+			else
             {
                 if (socket.ConnectServer())
                 {
                     socket.IsServer = false;
                     pn_GameBoard.Enabled = false;
                     Listen();
-                    MessageBox.Show("Kết nối thành công !!!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
+					MessageBox.Show("Connection successful!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				}
+				else
                 {
-                    MessageBox.Show("Không thể kết nối đến địa chỉ IP: " + socket.IP, "Lỗi kết nối", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    board.PlayMode = 2; // Switch to 2-player same computer mode as fallback
+					MessageBox.Show("Cannot connect to IP address: " + socket.IP, "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+					board.PlayMode = 2; // Switch to 2-player same computer mode as fallback
                 }
             }
         }
@@ -191,14 +191,14 @@ namespace TicTacToe
 
 					// ✅ gọi lại logic 2-player để cập nhật ảnh/tên ở UI
 					board.RefreshCurrentPlayerUI();
-
-					// Nếu AI đi trước thì để UI render xong rồi mới cho AI đi
-					if (board.AIGoesFirst)
-					{
-						this.Refresh();
-						Application.DoEvents();
-						board.StartAI();
-					}
+                    //thua--datfix
+                    // Nếu AI đi trước thì để UI render xong rồi mới cho AI đi
+     //               if (board.AIGoesFirst)
+					//{
+					//	this.Refresh();
+					//	Application.DoEvents();
+					//	board.StartAI();
+					//}
 
 
 					// Nếu AI đi trước, thì cho AI đi ngay lập tức
@@ -378,8 +378,11 @@ namespace TicTacToe
 				string msg;
 				if (board.PlayMode == 3) // Chơi với máy (AI)
 				{
-					int aiIndex = board.AIGoesFirst ? 0 : 1;
-					msg = (winnerIdx == aiIndex) ? "Computer wins!" : "You win!";
+					//int aiIndex = board.AIGoesFirst ? 0 : 1;
+					//msg = (winnerIdx == aiIndex) ? "Computer wins!" : "You win!";
+					string winnerNameAI = board.ListPlayers[winnerIdx].Name;
+					msg = (winnerNameAI == "Computer") ? "Computer wins!" : "You win!";
+
 				}
 				else
 				{
@@ -686,13 +689,9 @@ namespace TicTacToe
             if (string.IsNullOrWhiteSpace(txt_Message.Text))
                 return;
 
-            // Add message to local chat
-            string messageToAdd = "- " + PlayerName + ": " + txt_Message.Text + "\r\n";
-            txt_Chat.Text += messageToAdd;
-            
-            // Cuộn xuống để hiển thị tin nhắn mới nhất
-            txt_Chat.SelectionStart = txt_Chat.Text.Length;
-            txt_Chat.ScrollToCaret();
+            txt_Chat.Text += "- " + PlayerName + ": " + txt_Message.Text + "\r\n";
+
+            socket.Send(new SocketData((int)SocketCommand.SEND_MESSAGE, txt_Chat.Text, new Point()));
             
             // Store the message and clear text box regardless of connection status
             string currentMessage = txt_Message.Text;
