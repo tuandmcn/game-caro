@@ -758,6 +758,7 @@ namespace TicTacToe
 
         private void ProcessData(SocketData data)
         {
+            //PlayerName = board.ListPlayers[board.CurrentPlayer == 1 ? 0 : 1].Name;
             switch (data.Command)
             {
                 case (int)SocketCommand.SEND_POINT:

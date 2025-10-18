@@ -468,7 +468,7 @@ namespace TicTacToe
             // Check for draw (board full)
             if (StkUndoStep.Count == Constance.nRows * Constance.nCols)
             {
-                MessageBox.Show("Hòa c? !!!");
+                MessageBox.Show("Draw !!!");
                 return true;
             }
 
