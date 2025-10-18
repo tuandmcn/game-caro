@@ -60,6 +60,9 @@ namespace TicTacToe
 
         private bool ReceiveData(Socket target, byte[] data)
         {
+            if (target == null)
+                return false;
+
             return target.Receive(data) == 1;
         }
 
@@ -127,6 +130,25 @@ namespace TicTacToe
                 client.Close();
             } catch { }
             
+        }
+        
+        /// <summary>
+        /// Kiểm tra xem client đã kết nối chưa
+        /// </summary>
+        /// <returns></returns>
+        public bool IsClientConnected()
+        {
+            if (client == null)
+                return false;
+                
+            try
+            {
+                return client.Connected;
+            }
+            catch
+            {
+                return false;
+            }
         }
         #endregion
     }

@@ -31,6 +31,9 @@ namespace TicTacToe
         REDO,
         END_GAME,
         TIME_OUT,
-        QUIT
+        QUIT,
+        HOST_GOES_FIRST,      // Host chọn mình đi trước
+        CLIENT_GOES_FIRST,    // Host chọn Client đi trước
+        SEND_PLAYER_NAME      // Gửi tên người chơi
     }
 }

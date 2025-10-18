@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace TicTacToe
 {
-    class GameBoard
+    partial class GameBoard
     {
         #region Properties
         private Panel board; 
@@ -259,7 +259,7 @@ namespace TicTacToe
 
 				return false;
 			}
-			opCount[actor]++; // ghi nh?n m?t l?n thao tác Undo/Redo
+			opCount[actor]++; // ghi nhãn m?t l?n thao tác Undo/Redo
 
 
             PlayInfo OldPos = StkUndoStep.Peek();
@@ -316,7 +316,7 @@ namespace TicTacToe
 
 				return false;
 			}
-			opCount[actor]++; // ghi nh?n m?t l?n thao tác Undo/Redo
+			opCount[actor]++; // ghi nhãn m?t l?n thao tác Undo/Redo
 
 
             PlayInfo OldPos = StkRedoStep.Peek();

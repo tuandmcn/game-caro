@@ -14,6 +14,7 @@ namespace TicTacToe
         string PlayerName;
         bool IsHost;
         int BoardSize;
+        bool? LastHostGoesFirst = null; // Lưu lại lựa chọn ai đi trước trong LAN mode (null = chưa xác định)
 
         public GameCaro(string playerName, string ipAddress, bool isHost, int gameMode, int boardSize = 10)
         {
@@ -116,23 +117,91 @@ namespace TicTacToe
             if (isHost)
             {
                 socket.IsServer = true;
-                pn_GameBoard.Enabled = true;
                 socket.CreateServer();
-				MessageBox.Show("You are the server", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-			}
-			else
+                
+                // Tạo form chờ kết nối
+                WaitingConnectionForm waitingForm = new WaitingConnectionForm("You are the server. Waiting for opponent to connect...");
+                
+                // Tạo thread kiểm tra kết nối
+                Thread checkConnectionThread = new Thread(() =>
+                {
+                    // Chờ cho đến khi client kết nối (kiểm tra socket client đã được tạo chưa)
+                    while (!socket.IsClientConnected())
+                    {
+                        Thread.Sleep(500); // Kiểm tra mỗi 500ms
+                    }
+                    
+                    // Đóng form chờ
+                    waitingForm.CloseFormSafely();
+                });
+                checkConnectionThread.IsBackground = true;
+                checkConnectionThread.Start();
+                
+                // Hiển thị form chờ (block cho đến khi đóng)
+                waitingForm.ShowDialog();
+                
+                // Gửi tên của Host cho Client
+                socket.Send(new SocketData((int)SocketCommand.SEND_PLAYER_NAME, PlayerName, new Point()));
+                
+                // Chờ nhận tên của Client
+                Thread.Sleep(100); // Đợi một chút để đảm bảo dữ liệu được gửi
+                
+                // Sau khi client đã kết nối, hiển thị form chọn ai đi trước
+                using (LANFirstMoveForm lanFirstMoveForm = new LANFirstMoveForm())
+                {
+                    if (lanFirstMoveForm.ShowDialog() == DialogResult.OK)
+                    {
+                        bool hostGoesFirst = lanFirstMoveForm.HostGoesFirst;
+                        LastHostGoesFirst = hostGoesFirst; // Lưu lại lựa chọn
+                        
+                        // Gửi lựa chọn cho Client
+                        if (hostGoesFirst)
+                        {
+                            socket.Send(new SocketData((int)SocketCommand.HOST_GOES_FIRST, "", new Point()));
+                            pn_GameBoard.Enabled = true;  // Host được đi trước
+                        }
+                        else
+                        {
+                            socket.Send(new SocketData((int)SocketCommand.CLIENT_GOES_FIRST, "", new Point()));
+                            pn_GameBoard.Enabled = false; // Client được đi trước
+                        }
+                        
+                        // Vẽ bàn cờ trước, sau đó thiết lập người chơi đầu tiên
+                        board.DrawGameBoard();
+                        board.SetFirstPlayer(hostGoesFirst, true);
+                    }
+                    else
+                    {
+                        // Nếu hủy dialog, mặc định Host đi trước
+                        LastHostGoesFirst = true; // Lưu lại lựa chọn
+                        socket.Send(new SocketData((int)SocketCommand.HOST_GOES_FIRST, "", new Point()));
+                        pn_GameBoard.Enabled = true;
+                        
+                        board.DrawGameBoard();
+                        board.SetFirstPlayer(true, true);
+                    }
+                }
+                
+                Listen(); // Bắt đầu lắng nghe sau khi gửi lựa chọn
+            }
+            else
             {
                 if (socket.ConnectServer())
                 {
                     socket.IsServer = false;
-                    pn_GameBoard.Enabled = false;
-                    Listen();
-					MessageBox.Show("Connection successful!", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-				}
-				else
+                    
+                    // Gửi tên của Client cho Host
+                    socket.Send(new SocketData((int)SocketCommand.SEND_PLAYER_NAME, PlayerName, new Point()));
+                    
+                    // Chờ nhận tên của Host và lựa chọn ai đi trước
+                    MessageBox.Show("Connection successful! Waiting for host to choose who goes first...", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    
+                    Listen(); // Bắt đầu lắng nghe ngay
+                }
+                else
                 {
-					MessageBox.Show("Cannot connect to IP address: " + socket.IP, "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-					board.PlayMode = 2; // Switch to 2-player same computer mode as fallback
+                    MessageBox.Show("Cannot connect to IP address: " + socket.IP, "Connection Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    board.PlayMode = 2; // Switch to 2-player same computer mode as fallback
                 }
             }
         }
@@ -290,6 +359,9 @@ namespace TicTacToe
             // Cập nhật tiêu đề của form để hiển thị kích thước bàn cờ mới
             this.Text = $"Tic Tac Toe - Bàn cờ {BoardSize}x{BoardSize} - Thắng {board.CellsToWin} ô liên tiếp";
 
+            // Reset symbols về mặc định trước khi vẽ bàn cờ
+            board.ResetSymbols();
+            
             board.DrawGameBoard();
         }
 
@@ -424,11 +496,35 @@ namespace TicTacToe
                 try
                 {
                     socket.Send(new SocketData((int)SocketCommand.NEW_GAME, "", new Point()));
+                    
+                    // Sau khi gửi lệnh NEW_GAME, cần thiết lập lại symbols dựa trên LastHostGoesFirst
+                    if (LastHostGoesFirst.HasValue)
+                    {
+                        board.SetFirstPlayer(LastHostGoesFirst.Value, IsHost);
+                        
+                        // Thiết lập pn_GameBoard.Enabled dựa trên ai đi trước
+                        if (IsHost)
+                        {
+                            pn_GameBoard.Enabled = LastHostGoesFirst.Value; // Host enabled nếu Host đi trước
+                        }
+                        else
+                        {
+                            pn_GameBoard.Enabled = !LastHostGoesFirst.Value; // Client enabled nếu Client đi trước
+                        }
+                        
+                        // Bắt đầu đếm ngược nếu đến lượt của người chơi này
+                        if (pn_GameBoard.Enabled)
+                        {
+                            tm_CountDown.Start();
+                        }
+                    }
                 }
                 catch { }
             }
-                
-            pn_GameBoard.Enabled = true;
+            else
+            {
+                pn_GameBoard.Enabled = true;
+            }
             
             // Nếu đang ở chế độ chơi với máy và máy đi trước, thực hiện nước đi của máy
             if (board.PlayMode == 3 && board.AIGoesFirst)
@@ -624,6 +720,9 @@ namespace TicTacToe
                 return;
 
             txt_Chat.Text += "- " + PlayerName + ": " + txt_Message.Text + "\r\n";
+            
+            // Tự động cuộn xuống cuối để hiển thị tin nhắn mới nhất
+            ScrollChatToBottom();
 
             socket.Send(new SocketData((int)SocketCommand.SEND_MESSAGE, txt_Chat.Text, new Point()));
             
@@ -680,13 +779,40 @@ namespace TicTacToe
 
                 case (int)SocketCommand.SEND_MESSAGE:
                     txt_Chat.Text = data.Message;
+                    // Tự động cuộn xuống cuối để hiển thị tin nhắn mới nhất
+                    ScrollChatToBottom();
                     break;
 
                 case (int)SocketCommand.NEW_GAME:
                     this.Invoke((MethodInvoker)(() =>
                     {
                         NewGame();
-                        pn_GameBoard.Enabled = false;
+                        
+                        // Sau khi tạo game mới, thiết lập lại symbols dựa trên LastHostGoesFirst
+                        if (LastHostGoesFirst.HasValue)
+                        {
+                            board.SetFirstPlayer(LastHostGoesFirst.Value, IsHost);
+                            
+                            // Thiết lập pn_GameBoard.Enabled dựa trên ai đi trước
+                            if (IsHost)
+                            {
+                                pn_GameBoard.Enabled = LastHostGoesFirst.Value; // Host enabled nếu Host đi trước
+                            }
+                            else
+                            {
+                                pn_GameBoard.Enabled = !LastHostGoesFirst.Value; // Client enabled nếu Client đi trước
+                            }
+                            
+                            // Bắt đầu đếm ngược nếu đến lượt của người chơi này
+                            if (pn_GameBoard.Enabled)
+                            {
+                                tm_CountDown.Start();
+                            }
+                        }
+                        else
+                        {
+                            pn_GameBoard.Enabled = false;
+                        }
                     }));
                     break;
 
@@ -735,14 +861,70 @@ namespace TicTacToe
                     }));
                     break;
 
+                case (int)SocketCommand.HOST_GOES_FIRST:
+                    this.Invoke((MethodInvoker)(() =>
+                    {
+                        // Lưu lại lựa chọn
+                        LastHostGoesFirst = true;
+                        
+                        // Vẽ bàn cờ trước
+                        board.DrawGameBoard();
+                        
+                        // Host đi trước, Client đi sau
+                        pn_GameBoard.Enabled = false; // Client chờ đến lượt
+                        board.SetFirstPlayer(true, false); // false vì đây là Client
+                        MessageBox.Show("Host will go first. Wait for your turn!", "Turn Order", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }));
+                    break;
+
+                case (int)SocketCommand.CLIENT_GOES_FIRST:
+                    this.Invoke((MethodInvoker)(() =>
+                    {
+                        // Lưu lại lựa chọn
+                        LastHostGoesFirst = false;
+                        
+                        // Vẽ bàn cờ trước
+                        board.DrawGameBoard();
+                        
+                        // Client đi trước, Host đi sau
+                        pn_GameBoard.Enabled = true; // Client được đi trước
+                        board.SetFirstPlayer(false, false); // false vì đây là Client
+                        tm_CountDown.Start(); // Bắt đầu đếm ngược
+                        MessageBox.Show("You go first!", "Turn Order", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }));
+                    break;
+
+                case (int)SocketCommand.SEND_PLAYER_NAME:
+                    this.Invoke((MethodInvoker)(() =>
+                    {
+                        // Nhận tên của người chơi đối phương
+                        string opponentName = data.Message;
+                        
+                        // Cập nhật tên người chơi
+                        if (IsHost)
+                        {
+                            // Host: Player 0 là Host, Player 1 là Client
+                            board.ListPlayers[0].Name = PlayerName;
+                            board.ListPlayers[1].Name = opponentName;
+                        }
+                        else
+                        {
+                            // Client: Player 0 là Host, Player 1 là Client
+                            board.ListPlayers[0].Name = opponentName;
+                            board.ListPlayers[1].Name = PlayerName;
+                        }
+                        
+                        // Cập nhật UI nếu cần
+                        board.RefreshCurrentPlayerUI();
+                    }));
+                    break;
+
                 default:
                     break;
             }
 
             Listen();
         }
-        #endregion
-
         #endregion
 
         private void lbl_About_Click(object sender, EventArgs e)
@@ -754,5 +936,26 @@ namespace TicTacToe
         {
 
         }
+
+        /// <summary>
+        /// Tự động cuộn xuống cuối cùng của txt_Chat để hiển thị tin nhắn mới nhất
+        /// </summary>
+        private void ScrollChatToBottom()
+        {
+            if (txt_Chat.InvokeRequired)
+            {
+                txt_Chat.Invoke(new MethodInvoker(() =>
+                {
+                    txt_Chat.SelectionStart = txt_Chat.Text.Length;
+                    txt_Chat.ScrollToCaret();
+                }));
+            }
+            else
+            {
+                txt_Chat.SelectionStart = txt_Chat.Text.Length;
+                txt_Chat.ScrollToCaret();
+            }
+        }
+        #endregion
     }
 }
