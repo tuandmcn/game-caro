@@ -183,7 +183,7 @@
             this.txt_PlayerName.ReadOnly = true;
             this.txt_PlayerName.Size = new System.Drawing.Size(146, 26);
             this.txt_PlayerName.TabIndex = 1;
-            this.txt_PlayerName.Text = "Quân Đặng";
+            this.txt_PlayerName.Text = "Player-1";
             this.txt_PlayerName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // pb_Avatar
