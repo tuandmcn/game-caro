@@ -531,13 +531,17 @@ namespace Game_Caro
 
             CurrentPlayer = CurrentPlayer == 1 ? 0 : 1;
             ChangePlayer();
+            MessageBox.Show("btn_Click 1: " + PlayerName);
 
             if (playerClicked != null)
                 playerClicked(this, new BtnClickEvent(GetButtonCoordinate(btn)));
-
+            MessageBox.Show("btn_Click 2: " + PlayerName);
             if (IsEndGame())
+            {
+                MessageBox.Show("btn_Click 3: " + PlayerName);
                 EndGame();
-
+            }
+            MessageBox.Show("btn_Click : " + PlayerName);
             if (!(IsAI) && playMode == 3)
                 StartAI();
 

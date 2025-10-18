@@ -13,7 +13,7 @@
         public static int nCols = 40;
 
         public static int CountDownStep = 100;
-        public static int CountDownTime = 100000;
+        public static int CountDownTime = 1000000;
         public static int CountDownInterval = 100;
     }
 }

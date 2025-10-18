@@ -140,8 +140,9 @@ namespace Game_Caro
 
         private void Board_GameOver(object sender, EventArgs e)
         {
+            MessageBox.Show("Board_GameOver first:" + PlayerName);
             EndGame();
-
+            MessageBox.Show("Board_GameOver next:" + PlayerName);
             if (board.PlayMode == 1)
                 socket.Send(new SocketData((int)SocketCommand.END_GAME, "", new Point()));
         }
@@ -408,6 +409,7 @@ namespace Game_Caro
                 case (int)SocketCommand.END_GAME:
                     this.Invoke((MethodInvoker)(() =>
                     {
+                        MessageBox.Show("engame: " + PlayerName);
                         EndGame();
                         MessageBox.Show(PlayerName + " is the winner ♥ !!!", "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }));
