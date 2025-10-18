@@ -446,8 +446,9 @@ namespace TicTacToe
 					//msg = (winnerIdx == aiIndex) ? "Computer wins!" : "You win!";
 					string winnerNameAI = board.ListPlayers[winnerIdx].Name;
 					msg = (winnerNameAI == "Computer") ? "Computer wins!" : "You win!";
+                    MessageBox.Show(msg, "Result", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-				}
+                }
 				else
 				{
 					// 2 người trên cùng máy hoặc qua LAN: hiển thị tên người thắng
@@ -455,7 +456,7 @@ namespace TicTacToe
 					msg = $"\"{winnerName}\" wins!";
 				}
 
-				MessageBox.Show(msg, "Result", MessageBoxButtons.OK, MessageBoxIcon.Information);
+				//MessageBox.Show(msg, "Result", MessageBoxButtons.OK, MessageBoxIcon.Information);
 			}
 
 			EndGame();  // dừng đồng hồ, khóa bàn cờ
