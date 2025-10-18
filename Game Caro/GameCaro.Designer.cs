@@ -93,7 +93,7 @@
             this.pn_GameBoard.Location = new System.Drawing.Point(13, 41);
             this.pn_GameBoard.Margin = new System.Windows.Forms.Padding(2);
             this.pn_GameBoard.Name = "pn_GameBoard";
-            this.pn_GameBoard.Size = new System.Drawing.Size(630, 626);
+            this.pn_GameBoard.Size = new System.Drawing.Size(630, 635);
             this.pn_GameBoard.TabIndex = 0;
             // 
             // panel1
@@ -358,7 +358,7 @@
             // 
             this.txt_Message.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.txt_Message.Font = new System.Drawing.Font("Arial", 12F);
-            this.txt_Message.Location = new System.Drawing.Point(656, 641);
+            this.txt_Message.Location = new System.Drawing.Point(656, 650);
             this.txt_Message.Margin = new System.Windows.Forms.Padding(2);
             this.txt_Message.Name = "txt_Message";
             this.txt_Message.Size = new System.Drawing.Size(243, 26);
@@ -374,7 +374,7 @@
             this.btn_Send.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btn_Send.Font = new System.Drawing.Font("Arial", 10.5F, System.Drawing.FontStyle.Bold);
             this.btn_Send.ForeColor = System.Drawing.Color.White;
-            this.btn_Send.Location = new System.Drawing.Point(903, 641);
+            this.btn_Send.Location = new System.Drawing.Point(903, 650);
             this.btn_Send.Margin = new System.Windows.Forms.Padding(2);
             this.btn_Send.Name = "btn_Send";
             this.btn_Send.Size = new System.Drawing.Size(53, 24);
@@ -546,15 +546,15 @@
             this.txt_Chat.BackColor = System.Drawing.Color.White;
             this.txt_Chat.Font = new System.Drawing.Font("Arial", 11F);
             this.txt_Chat.ForeColor = System.Drawing.Color.DarkBlue;
-            this.txt_Chat.Location = new System.Drawing.Point(656, 444);
+            this.txt_Chat.Location = new System.Drawing.Point(656, 443);
             this.txt_Chat.Margin = new System.Windows.Forms.Padding(2);
             this.txt_Chat.Multiline = true;
             this.txt_Chat.Name = "txt_Chat";
             this.txt_Chat.ReadOnly = true;
             this.txt_Chat.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txt_Chat.Size = new System.Drawing.Size(301, 192);
+            this.txt_Chat.Size = new System.Drawing.Size(301, 204);
             this.txt_Chat.TabIndex = 4;
-            this.txt_Chat.Text = "- Player 1: E dạo này ổn ko còn đi làm ở công ty cũ";
+            this.txt_Chat.Text = "- Player 1: Typing here!";
             // 
             // GameCaro
             // 
@@ -563,7 +563,7 @@
             this.BackColor = System.Drawing.Color.PowderBlue;
             this.BackgroundImage = global::Game_Caro.Properties.Resources.background_main;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(970, 609);
+            this.ClientSize = new System.Drawing.Size(970, 679);
             this.Controls.Add(this.txt_Chat);
             this.Controls.Add(this.txt_Message);
             this.Controls.Add(this.panel4);

@@ -123,8 +123,10 @@ namespace Game_Caro
         {
             try
             {
-                server.Close();
-                client.Close();
+                if (server != null)
+                    server.Close();
+                if (client != null)
+                    client.Close();
             } catch { }
             
         }
