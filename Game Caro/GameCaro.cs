@@ -479,6 +479,10 @@ namespace TicTacToe
 
         private void ViaLANToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (IsHost)
+            {
+                socket.CloseConnect();
+            }    
             // Method kept for compatibility with menu item
             board.PlayMode = 1;
             

@@ -12,7 +12,7 @@
 
         // Countdown settings
         public static int CountDownStep = 100;
-        public static int CountDownTime = 10000;
+        public static int CountDownTime = 100000;
         public static int CountDownInterval = 100;
     }
 }
