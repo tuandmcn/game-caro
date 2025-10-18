@@ -476,7 +476,7 @@ namespace Game_Caro
         {
             if (StkUndoStep.Count == Constance.nRows * Constance.nCols)
             {
-                MessageBox.Show("Hòa cờ !!!");
+                MessageBox.Show("Draw !!!");
                 return true;
             }
 
